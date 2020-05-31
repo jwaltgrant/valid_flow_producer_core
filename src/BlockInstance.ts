@@ -26,9 +26,13 @@ export default class BlockInstance implements IBlockInstance{
     changeBlock(blockSetKey: string, blockDef: IBlockDef){
         this.blockSetKey = blockSetKey;
         this.blockKey = blockDef.blockKey;
-        this.args = blockDef.args.map((arg) => {
-            return new ArgInstance(arg.name, arg.default, false);
-        });
+        if(blockDef.args){
+            this.args = blockDef.args.map((arg) => {
+                return new ArgInstance(arg.name, arg.default, false);
+            });
+        } else if(blockDef.listArgs){
+            this.args = [];
+        }
     }
 
     /**
