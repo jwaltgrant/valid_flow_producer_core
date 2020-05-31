@@ -4,5 +4,8 @@
   "main": "index.js",
   "repository": "https://github.com/jwaltgrant/valid_flow_producer_core.git",
   "author": "Josh Grant <jwaltgrant@gmail.com>",
-  "license": "GPL"
+  "license": "GPL",
+  "devDependencies": {
+    "jest": "^26.0.1"
+  }
 }
