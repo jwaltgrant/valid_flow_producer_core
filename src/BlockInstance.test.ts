@@ -1,7 +1,7 @@
-import { blockSetData } from './data';
-import BlockInstance from '../src/BlockInstance';
-import BlockSet from '../src/BlockSet'
-import ArgInstance from '../src/ArgInstance';
+import { blockSetData } from '../test/data';
+import BlockInstance from './BlockInstance';
+import BlockSet from './BlockSet'
+import ArgInstance from './ArgInstance';
 
 test('Set Block Data', () => {
     const blockSets = blockSetData.map((blockSetData) => BlockSet.deserialise(blockSetData));
