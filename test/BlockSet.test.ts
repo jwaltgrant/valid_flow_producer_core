@@ -1,34 +1,8 @@
 import BlockSet from '../src/BlockSet';
+import { blockSetData } from './data';
 
 test('Deserialize BlockSet', () => {
-    const data = {
-      blockSetKey: "number",
-      blocks: [
-        {
-          blockKey: "gt",
-          uiString: "Is Greater Than",
-          args: [
-            {
-              name: "lhs",
-              type: "number",
-            },
-            {
-              name: "rhs",
-              type: "number",
-            },
-          ],
-          returnType: "boolean",
-        },
-        {
-          blockKey: "sum",
-          uiString: "Sum Of",
-          listArgs: true,
-          listArgType: "number",
-          returnType: "number",
-        },
-      ]
-    };
-    const blockSet = BlockSet.deserialise(data);
+    const blockSet = BlockSet.deserialise(blockSetData[0]);
     expect(blockSet.findBlock("gt")).not.toBeNull();
     expect(blockSet.findBlock("sum")).not.toBeNull();
     expect(blockSet.findBlock('missinng')).toBeUndefined();

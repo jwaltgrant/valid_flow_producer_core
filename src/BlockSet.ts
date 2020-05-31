@@ -1,24 +1,13 @@
-interface IArgDef{
-    name: string;
-    type?: string;
-}
+import { IBlockDef } from './BlockDef';
 
-export interface IBlock{
-    blockKey: string;
-    uiString?: string;
-    args?: IArgDef[];
-    listArgs?: boolean;
-    listArgType?: string;
-    returnType?: string;
-}
 interface IBlockSet{
     blockSetKey: string;
-    blocks: IBlock[];
+    blocks: IBlockDef[];
 }
 
 export default class BlockSet{
     bockSetKey: string;
-    blocks: Block[];
+    blocks: IBlockDef[];
 
     findBlock(blockKey: string){
         return this.blocks.find((block) => block.blockKey === blockKey);
@@ -29,13 +18,4 @@ export default class BlockSet{
         Object.assign(blockSet, data);
         return blockSet;
     }
-}
-
-class Block implements IBlock {
-  blockKey: string;
-  uiString?: string;
-  args?: IArgDef[];
-  listArgs?: boolean;
-  listArgType?: string;
-  returnType?: string;
 }

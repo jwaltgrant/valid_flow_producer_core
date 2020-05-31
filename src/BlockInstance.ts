@@ -1,4 +1,5 @@
 import ArgInstance, { IArgInstance } from './ArgInstance';
+import { IBlockDef } from './BlockDef';
 
 export interface IBlockInstance{
     blockSetKey: string;
@@ -18,17 +19,16 @@ export default class BlockInstance implements IBlockInstance{
     }
 
     /**
-     * Upade Block Isntance, this should be called everytime the user chagnes
-     * This is basically creating an entirely new object, but allows the same references
-     * to to be held.
-     * @param blockSetKey Block Set Key to save onto this function
-     * @param blockKey Block key to save onto this function
-     * @param args ArgumentDefinitions to save onto this function
+     * Change the Block Def being used in this insntance
+     * @param blockSetKey Block Set Key for the set to be used in this instance
+     * @param blockDef Block to populate block instance with
      */
-    updateFunction(blockSetKey: string, blockKey: string, args: ArgInstance[]) {
+    changeBlock(blockSetKey: string, blockDef: IBlockDef){
         this.blockSetKey = blockSetKey;
-        this.blockKey = blockKey;
-        this.args = args;
+        this.blockKey = blockDef.blockKey;
+        this.args = blockDef.args.map((arg) => {
+            return new ArgInstance(arg.name, arg.default, false);
+        });
     }
 
     /**
