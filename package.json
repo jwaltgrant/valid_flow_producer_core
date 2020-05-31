@@ -2,10 +2,26 @@
   "name": "valid_flow_producer_core",
   "version": "0.1.0",
   "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "webpack"
+  },
   "repository": "https://github.com/jwaltgrant/valid_flow_producer_core.git",
   "author": "Josh Grant <jwaltgrant@gmail.com>",
   "license": "GPL",
   "devDependencies": {
-    "jest": "^26.0.1"
+    "@babel/core": "^7.10.2",
+    "@babel/preset-env": "^7.10.2",
+    "@babel/preset-typescript": "^7.10.1",
+    "@types/jest": "^25.2.3",
+    "babel-jest": "^26.0.1",
+    "jest": "^26.0.1",
+    "ts-jest": "^26.1.0",
+    "ts-loader": "^7.0.5",
+    "typescript": "^3.9.3"
+  },
+  "dependencies": {
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
   }
 }

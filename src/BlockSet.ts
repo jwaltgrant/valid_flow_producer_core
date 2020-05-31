@@ -3,7 +3,7 @@ interface IArgDef{
     type?: string;
 }
 
-interface IBlock{
+export interface IBlock{
     blockKey: string;
     uiString?: string;
     args?: IArgDef[];
@@ -20,12 +20,22 @@ export default class BlockSet{
     bockSetKey: string;
     blocks: Block[];
 
-    static deserialise(data: IBlockSet){
+    findBlock(blockKey: string){
+        return this.blocks.find((block) => block.blockKey === blockKey);
+    }
+
+    static deserialise(data: IBlockSet): BlockSet{
         let blockSet = new BlockSet();
         Object.assign(blockSet, data);
+        return blockSet;
     }
 }
 
-class Block{
-
+class Block implements IBlock {
+  blockKey: string;
+  uiString?: string;
+  args?: IArgDef[];
+  listArgs?: boolean;
+  listArgType?: string;
+  returnType?: string;
 }
