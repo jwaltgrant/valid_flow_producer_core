@@ -1,5 +1,5 @@
-import BlockSet from './BlockSet';
-import { blockSetData } from '../test/data';
+import BlockSet from '../src/BlockSet';
+import { blockSetData } from './data';
 
 test('Deserialize BlockSet', () => {
     const blockSet = BlockSet.deserialise(blockSetData[0]);
