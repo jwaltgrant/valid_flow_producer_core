@@ -12,4 +12,8 @@ export default class VoidAction extends ActionNode implements IVoidAction{
         super(id, block, returnKey);
         this.targets = targets || [];
     }
+
+    static deserialize(data: IVoidAction): VoidAction{
+        return new VoidAction(data.id, data.block, data.returnKey, data.targets);
+    }
 }

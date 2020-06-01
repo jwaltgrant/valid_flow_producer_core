@@ -3,6 +3,7 @@ import BlockInstance from '../src/BlockInstance';
 import BlockSet from '../src/BlockSet'
 import ArgInstance from '../src/ArgInstance';
 
+
 test('Set Block Data', () => {
     const blockSets = blockSetData.map((blockSetData) => BlockSet.deserialise(blockSetData));
     const block = new BlockInstance();
