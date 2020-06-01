@@ -1,0 +1,3 @@
+[submodule "valid_flow_spec"]
+	path = valid_flow_spec
+	url = https://github.com/jwaltgrant/valid_flow_spec.git
