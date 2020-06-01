@@ -1,15 +1,12 @@
 import AbstractNode, { IAbstractNode } from "../AbstractNode";
-
-export interface IOutputInstance{
-
-}
+import { IOutputDef } from './OutputDef';
 
 export interface IOutputNode extends IAbstractNode{
-    outputInstance: IOutputInstance;
+    outputInstance: IOutputDef;
 }
 
 export default class OutputNode extends AbstractNode implements IOutputNode{
-    outputInstance: IOutputInstance;
+    outputInstance: IOutputDef;
 
     
 }
