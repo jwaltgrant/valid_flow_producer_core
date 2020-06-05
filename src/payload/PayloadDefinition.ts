@@ -21,19 +21,28 @@ export default class PayloadDefinition{
     }
 
     /**
+     * Get the Payload Item with the provided name, if there is one
+     * @param name Name of the payload item to find
+     */
+    public findPayloadItem(name: string){
+        return this.payloadItems.find((item) => item.name === name);
+    }
+
+    /**
+     * Get the Dynamic key with the provided name, if there is one
+     * @param name Name of the dynamic key to find
+     */
+    public findDynameKey(name: string){
+        return this.dynamicKeys.find((key) => key.name === name);
+    }
+
+    /**
      * Check if there is an object with the provided name in the payload definition
      * @param name Name to check Payload Items and Dynamic Keys for
      */
     public hasItemNamed(name: string) : boolean{
-        for(const item of this.payloadItems){
-            if(item.name === name){
-                return true;
-            }
-        }
-        for(const item of this.dynamicKeys){
-            if(item.name === name){
-                return true;
-            }
+        if(this.findPayloadItem(name) || this.findDynameKey(name)){
+            return true;
         }
         return false;
     }
@@ -53,9 +62,35 @@ export default class PayloadDefinition{
         }
     }
 
+    /**
+     * Add Item to Payload Definition, ensuring the item's key is not already in use
+     * @param item Item to add to the payload
+     */
     public addPayloadItem(item: IFieldDef){
         if(this.hasItemNamed(item.name)){
             throw new PayloadDefinitionError(`Name: ${item.name} is taken`, PayloadErrorCode.TAKEN_NAME);
+        }
+    }
+
+    /**
+     * Remove Payload Item with the provided name
+     * @param name Name of the Payload Item to Remove
+     */
+    public removePayloadItem(name: string){
+        const index = this.payloadItems.indexOf(this.findPayloadItem(name));
+        if(index > -1){
+            this.payloadItems.splice(index, 1);
+        }
+    }
+
+    /**
+     * Remove Dynamic Key with the provided name
+     * @param name Name of the Dynamic Key to remove
+     */
+    public removeDynamicKey(name: string){
+        const index = this.payloadItems.indexOf(this.findDynameKey(name));
+        if(index > -1){
+            this.dynamicKeys.splice(index, 1);
         }
     }
 }
