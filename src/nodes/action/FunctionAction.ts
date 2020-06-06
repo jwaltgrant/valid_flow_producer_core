@@ -8,8 +8,8 @@ export interface IFunctionAction extends IActionNode{
 export default class FunctionAction extends ActionNode implements IFunctionAction{
     actionKey: string = 'FUNCTION';
     targets: number[];
-    constructor(id: number, block?: IBlockInstance, returnKey?: string, targets?: number[]){
-        super(id, block, returnKey);
+    constructor(id: number, parentNodeIDs: number[] = [], block?: IBlockInstance, returnKey?: string, targets?: number[]){
+        super(id, parentNodeIDs, block, returnKey);
         this.targets = targets || [];
     }
 
