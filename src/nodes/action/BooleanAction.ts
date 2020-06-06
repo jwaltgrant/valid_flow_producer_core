@@ -16,4 +16,12 @@ export default class BooleanAction extends ActionNode implements IBooleanAction{
         this.trueTargets = trueTargets || [];
         this.falseTargets = falseTargets || [];
     }
+
+    serialize(): IBooleanAction{
+        return {
+            ...super.serialize(),
+            falseTargets: this.falseTargets,
+            trueTargets: this.trueTargets
+        }
+    }
 }

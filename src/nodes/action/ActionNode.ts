@@ -38,4 +38,14 @@ export default abstract class ActionNode extends AbstractNode implements IAction
       }
       return ancestors;
     }
+
+    serialize(): IActionNode{
+      return {
+        ...super.serialize(),
+        block: this.block,
+        returnKey: this.returnKey,
+        parentNodeIDs: this.parentNodeIDs,
+        actionKey: this.actionKey
+      }
+    }
 }

@@ -13,6 +13,13 @@ export default class FunctionAction extends ActionNode implements IFunctionActio
         this.targets = targets || [];
     }
 
+    serialize(): IFunctionAction{
+        return {
+            ...super.serialize(),
+            targets: this.targets
+        }
+    }
+
     static deserialize(data: IFunctionAction): FunctionAction{
         return new FunctionAction(data.id, data.block, data.returnKey, data.targets);
     }

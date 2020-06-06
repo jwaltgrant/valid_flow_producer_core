@@ -6,7 +6,7 @@ export interface IAbstractNode{
 
 export interface IChildNode {
   parentNodeIDs: number[];
-  getAncenstorNodeIDs: (nodes: AbstractNode[]) => number[];
+  getAncenstorNodeIDs?: (nodes: AbstractNode[]) => number[];
 }
 
 export function instanceOfIChildNode(object: any): object is IChildNode{
