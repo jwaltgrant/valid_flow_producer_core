@@ -15,9 +15,12 @@ export default abstract class ActionNode extends AbstractNode implements IAction
     abstract readonly actionKey: string;
     block: IBlockInstance;
     returnKey: string;
-    parentNodeIDs: number[];
+    parentNodeIDs: string[];
 
-    constructor(id: number, parentNodeIDs: number[] = [], block?: IBlockInstance, returnKey?: string){
+    abstract addConnection(toId: string, connectionKey: string): void;
+    abstract removeConnection(fromId: string, connectionKey: string): void;
+
+    constructor(id: string, parentNodeIDs: string[] = [], block?: IBlockInstance, returnKey?: string){
         super(id);
         this.block = block;
         this.returnKey = returnKey;
@@ -28,8 +31,8 @@ export default abstract class ActionNode extends AbstractNode implements IAction
      * Search through a list of nodes for all nodes which are up stream(ancensotrs) of this node
      * @param nodes Nodes to search through to find ancestors in
      */
-    getAncenstorNodeIDs(nodes: AbstractNode[]): number[]{
-      let ancestors: number[] = [];
+    getAncenstorNodeIDs(nodes: AbstractNode[]): string[]{
+      let ancestors: string[] = [];
       ancestors.push(...this.parentNodeIDs);
       for(const node of nodes){
         if (this.parentNodeIDs.indexOf(node.id) > -1 && instanceOfIChildNode(node)) {

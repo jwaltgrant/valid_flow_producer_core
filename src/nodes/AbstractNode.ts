@@ -1,12 +1,12 @@
 import { IBlockInstance } from "../BlockInstance";
 
 export interface IAbstractNode{
-    id: number;
+    id: string;
 }
 
 export interface IChildNode {
-  parentNodeIDs: number[];
-  getAncenstorNodeIDs?: (nodes: AbstractNode[]) => number[];
+  parentNodeIDs: string[];
+  getAncenstorNodeIDs?: (nodes: AbstractNode[]) => string[];
 }
 
 export function instanceOfIChildNode(object: any): object is IChildNode{
@@ -14,9 +14,9 @@ export function instanceOfIChildNode(object: any): object is IChildNode{
 }
 
 export default abstract class AbstractNode implements IAbstractNode{
-    id: number;
+    id: string;
 
-    constructor(id: number){
+    constructor(id: string){
         this.id = id;
     }
 
