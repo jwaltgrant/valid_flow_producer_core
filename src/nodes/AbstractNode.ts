@@ -19,4 +19,10 @@ export default abstract class AbstractNode implements IAbstractNode{
     constructor(id: number){
         this.id = id;
     }
+
+    serialize(): IAbstractNode{
+        return {
+            id: this.id
+        }
+    }
 }
