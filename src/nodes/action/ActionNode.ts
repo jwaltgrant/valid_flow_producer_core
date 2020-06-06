@@ -17,8 +17,6 @@ export default abstract class ActionNode extends AbstractNode implements IAction
     returnKey: string;
     parentNodeIDs: string[];
 
-    abstract addConnection(toId: string, connectionKey: string): void;
-    abstract removeConnection(fromId: string, connectionKey: string): void;
 
     constructor(id: string, parentNodeIDs: string[] = [], block?: IBlockInstance, returnKey?: string){
         super(id);

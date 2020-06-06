@@ -15,6 +15,8 @@ export function instanceOfIChildNode(object: any): object is IChildNode{
 
 export default abstract class AbstractNode implements IAbstractNode{
     id: string;
+    abstract addConnection(toId: string, connectionKey: string): void;
+    abstract removeConnection(fromId: string, connectionKey: string): void;
 
     constructor(id: string){
         this.id = id;
