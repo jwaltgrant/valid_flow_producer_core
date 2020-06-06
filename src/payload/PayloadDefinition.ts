@@ -1,6 +1,7 @@
 import IFieldDef from '../FieldDef';
 import IDyamicKey from './DynamicKey';
 import {PayloadDefinitionError, PayloadErrorCode} from '../Errors';
+import AbstractNode, { IChildNode } from '../nodes/AbstractNode';
 
 /**
  * Payload Definition allows the user to create definition of the input
@@ -70,6 +71,7 @@ export default class PayloadDefinition{
         if(this.hasItemNamed(item.name)){
             throw new PayloadDefinitionError(`Name: ${item.name} is taken`, PayloadErrorCode.TAKEN_NAME);
         }
+        this.payloadItems.push(item);
     }
 
     /**
@@ -83,6 +85,13 @@ export default class PayloadDefinition{
         }
     }
 
+    public addDynamicKey(dynamicKey: IDyamicKey){
+        if(this.hasItemNamed(dynamicKey.name)){
+            throw new PayloadDefinitionError(`Name: ${dynamicKey.name} is taken`, PayloadErrorCode.TAKEN_NAME);
+        }
+        this.dynamicKeys.push(dynamicKey);
+    }
+
     /**
      * Remove Dynamic Key with the provided name
      * @param name Name of the Dynamic Key to remove
@@ -92,5 +101,24 @@ export default class PayloadDefinition{
         if(index > -1){
             this.dynamicKeys.splice(index, 1);
         }
+    }
+
+    /**
+     * Get all the payload items (dynamicly created or otherwise) that a given node
+     * has access to. Do this by determing all nodes that are ancenstors of the provided node
+     * and adding the dynamic keys which are created by the ancestor nodes to the statically define
+     * payload items that make up the flow input
+     * @param node Node to get all available payload items for
+     * @param nodes Nodes to search through for all available payload items
+     */
+    public getAvailablePayloadItems(node: IChildNode, nodes: AbstractNode[]): IFieldDef[]{
+        let payloadItems: IFieldDef[] = this.payloadItems;
+        const nodeAncestors = node.getAncenstorNodeIDs(nodes);
+        for(const dynamicKey of this.dynamicKeys){
+            if(nodeAncestors.includes(dynamicKey.nodeID)){
+                payloadItems.push(dynamicKey);
+            }
+        }
+        return payloadItems;
     }
 }
