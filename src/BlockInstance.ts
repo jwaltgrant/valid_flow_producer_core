@@ -4,13 +4,15 @@ import { IBlockDef } from './BlockDef';
 export interface IBlockInstance{
     blockSetKey: string;
     blockKey: string;
-    args: IArgInstance[];    
+    args: IArgInstance[];
+    returnType: string;   
 }
 
 export default class BlockInstance implements IBlockInstance{
     blockSetKey: string;
     blockKey: string;
     args: ArgInstance[];
+    returnType: string;
 
     constructor(blockSetKey?: string, blockKey?: string, args?: ArgInstance[]){
         this.blockSetKey = blockSetKey;

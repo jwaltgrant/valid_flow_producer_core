@@ -32,9 +32,16 @@ export default class PayloadDefinition{
     /**
      * Get the Dynamic key with the provided name, if there is one
      * @param name Name of the dynamic key to find
+     * @param nodeID ID of node to find dynamic key for
      */
-    public findDynameKey(name: string){
-        return this.dynamicKeys.find((key) => key.name === name);
+    public findDynamicKey(name?: string, nodeID?: string){
+        if(name){
+            return this.dynamicKeys.find((key) => key.name === name);
+        }
+        else if(nodeID){
+            return this.dynamicKeys.find((key) => key.nodeID === nodeID);
+        }
+        return null;
     }
 
     /**
@@ -42,7 +49,7 @@ export default class PayloadDefinition{
      * @param name Name to check Payload Items and Dynamic Keys for
      */
     public hasItemNamed(name: string) : boolean{
-        if(this.findPayloadItem(name) || this.findDynameKey(name)){
+        if(this.findPayloadItem(name) || this.findDynamicKey(name)){
             return true;
         }
         return false;
@@ -89,17 +96,41 @@ export default class PayloadDefinition{
         if(this.hasItemNamed(dynamicKey.name)){
             throw new PayloadDefinitionError(`Name: ${dynamicKey.name} is taken`, PayloadErrorCode.TAKEN_NAME);
         }
+        else if(this.findDynamicKey(null, dynamicKey.nodeID)){
+            throw new PayloadDefinitionError(`Existing Key for Node ID: ${dynamicKey.nodeID}`, PayloadErrorCode.UNKNOWN);
+        }
         this.dynamicKeys.push(dynamicKey);
     }
 
     /**
      * Remove Dynamic Key with the provided name
      * @param name Name of the Dynamic Key to remove
+     * @param nodeID ID of the node which the Dynamic Key correlates to
      */
-    public removeDynamicKey(name: string){
-        const index = this.payloadItems.indexOf(this.findDynameKey(name));
-        if(index > -1){
+    public removeDynamicKey(name?: string, nodeID?: string){
+        let index = -1;
+        if(name){
+            index = this.payloadItems.indexOf(this.findDynamicKey(name));
+        } else if(nodeID){
+            index = this.payloadItems.indexOf(this.findDynamicKey(null, nodeID));
+        }
+        if (index > -1) {
             this.dynamicKeys.splice(index, 1);
+        }
+    }
+
+    /**
+     * Change (or add if not found) a dynamic key's content
+     * @param nodeID Node ID to Change Key for
+     * @param dynamicKey New Data to populate with
+     */
+    public changeDynamicKey(nodeID: string, dynamicKey: IDyamicKey){
+        const dk = this.findDynamicKey(null, nodeID);
+        if(dk){
+            dk.name = dynamicKey.name;
+            dk.type = dynamicKey.type;
+        } else{
+            this.addDynamicKey(dynamicKey);
         }
     }
 
