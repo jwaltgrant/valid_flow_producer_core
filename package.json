@@ -1,14 +1,17 @@
 {
-  "name": "valid_flow_producer_core",
+  "name": "@river_boyne/valid_flow_producer_core",
   "version": "0.1.0",
   "main": "index.js",
   "scripts": {
     "test": "jest",
     "build": "webpack"
   },
-  "repository": "https://github.com/jwaltgrant/valid_flow_producer_core.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jwaltgrant/valid_flow_producer_core.git"
+  },
   "author": "Josh Grant <jwaltgrant@gmail.com>",
-  "license": "GPL",
+  "license": "GPL-3.0-or-later",
   "devDependencies": {
     "@babel/core": "^7.10.2",
     "@babel/preset-env": "^7.10.2",
@@ -23,5 +26,13 @@
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "description": "Start",
+  "bugs": {
+    "url": "https://github.com/jwaltgrant/valid_flow_producer_core/issues"
+  },
+  "homepage": "https://github.com/jwaltgrant/valid_flow_producer_core#readme",
+  "directories": {
+    "test": "test"
+  }
 }
