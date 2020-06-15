@@ -4,7 +4,7 @@ export interface IAbstractNode{
     id: string;
 }
 
-export interface IChildNode {
+export interface IChildNode extends IAbstractNode {
   parentNodeIDs: string[];
   getAncenstorNodeIDs?: (nodes: AbstractNode[]) => string[];
 }
