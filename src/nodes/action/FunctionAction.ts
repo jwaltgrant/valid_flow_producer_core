@@ -32,7 +32,7 @@ export default class FunctionAction extends ActionNode implements IFunctionActio
     }
 
     public static deserialize(data: IFunctionAction): FunctionAction{
-        return new FunctionAction(data.id, data.block, data.returnKey, data.targets);
+        return new FunctionAction(data.id, data.parentNodeIDs, data.block, data.returnKey, data.targets);
     }
 
     public addConnection(toId: string, connectionKey: FunctionActionKey): void {

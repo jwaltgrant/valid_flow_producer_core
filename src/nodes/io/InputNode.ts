@@ -5,9 +5,15 @@ export interface IInputNode extends IAbstractNode{
 }
 
 export default class InputNode extends AbstractNode implements IInputNode{
+    addConnection(toId: string, connectionKey: string): void {
+        throw new Error("Method not implemented.");
+    }
+    removeConnection(fromId: string, connectionKey: string): void {
+        throw new Error("Method not implemented.");
+    }
     targets: number[];
 
-    constructor(id: number, targets?: number[]){
+    constructor(id: string, targets?: number[]){
         super(id);
         this.targets = targets || [];
     }
