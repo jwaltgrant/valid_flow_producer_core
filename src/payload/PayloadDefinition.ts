@@ -56,7 +56,7 @@ export function hasItem(
  * Add Payload Item and return a spread of the updated payload def
  * @param item Item to add to the payload
  */
-export function addPayloadItem(payloadDefinition: IPayloadDefinition, item: IFieldDef){
+export function addPayloadItem(payloadDefinition: IPayloadDefinition, item: IFieldDef): IPayloadDefinition{
   if(hasItem(payloadDefinition, item.name)){
     throw new Error(`Item with name: ${item.name} is already in use`);
   }
@@ -72,14 +72,14 @@ export function addPayloadItem(payloadDefinition: IPayloadDefinition, item: IFie
  * @param payloadDefinition IPayloadDefinition to add to
  * @param item Item to Add
  */
-export function addDynamicKey(payloadDefinition: IPayloadDefinition, item: IDynamicKey){
+export function addDynamicKey(payloadDefinition: IPayloadDefinition, item: IDynamicKey): IPayloadDefinition{
   if(hasItem(payloadDefinition, item.name)){
     throw new Error(`Item with name: ${item.name} is already in use`);
   }
-  const dyamicKeys = [...payloadDefinition.dynamicKeys, item];
+  const dynamicKeys = [...payloadDefinition.dynamicKeys, item];
   return {
     ...payloadDefinition,
-    dyamicKeys
+    dynamicKeys
   };
 }
 
