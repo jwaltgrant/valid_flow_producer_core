@@ -92,7 +92,7 @@ test('Add Dyamic Key', () => {
     };
     const expected = [... dynamic, newItem];
     const updated = Payload.addDynamicKey(payloadDef, newItem);
-    expect(expected).toEqual(updated.dyamicKeys);
+    expect(expected).toEqual(updated.dynamicKeys);
     expect(expected.length).toEqual(dynamic.length + 1);
 });
 
@@ -113,7 +113,9 @@ test('Remove Item', () => {
     expect(Payload.removeItem(payloadDef, name).payloadItems).toEqual(expected);
     name = dynamic[dynamic.length - 1].name;
     expected = [...dynamic];
-    expected.splice(dynamic.length, 1);
+    expected.splice(dynamic.length - 1, 1);
+    console.log(name);
+    console.log(expected);
     expect(Payload.removeItem(payloadDef, name).dynamicKeys).toEqual(expected);
 });
 
