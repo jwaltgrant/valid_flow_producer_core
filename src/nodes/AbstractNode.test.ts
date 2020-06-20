@@ -1,10 +1,10 @@
 import {IAbstractNode, getAncenstorNodeIDs, IChildNode} from './AbstractNode';
 
-const inputNode: IAbstractNode = {
+export const inputNode: IAbstractNode = {
     id: '1'
 }
 
-const childNodes: IChildNode[] = [
+export const childNodes: IChildNode[] = [
     {
         id: '2',
         parentNodeIDs: ['1']
@@ -23,7 +23,7 @@ const childNodes: IChildNode[] = [
     }
 ]
 
-const allNodes = [inputNode, ...childNodes];
+export const allNodes = [inputNode, ...childNodes];
 
 test('Ancenstors are 1, 2, and 4', () => {
     const ancenstors = getAncenstorNodeIDs(childNodes[3], allNodes);

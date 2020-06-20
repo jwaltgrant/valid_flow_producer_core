@@ -4,9 +4,13 @@ export interface IAbstractNode{
     id: string;
 }
 
+/**
+ * Parse through nodes recursively and find all ancestores of `forNode`
+ * @param forNode Node to get all Ancestor IDs for
+ * @param allNodes All Available nodes
+ */
 export function getAncenstorNodeIDs(forNode: IChildNode, allNodes: IAbstractNode[]){
-    let ancestors: string[] = [];
-    ancestors.push(...forNode.parentNodeIDs);
+    let ancestors: string[] = [...forNode.parentNodeIDs];
     for (const node of allNodes) {
       if (
         forNode.parentNodeIDs.indexOf(node.id) > -1 &&
