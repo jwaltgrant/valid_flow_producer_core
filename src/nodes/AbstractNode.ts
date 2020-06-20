@@ -1,5 +1,30 @@
 import { IBlockInstance } from "../BlockInstance";
 
+export class NodeActionClassRegistry{
+  private nodeActionClasses: INodeActions<AbstractNode>[];
+
+  public registerNodeActionClass(actionClass: INodeActions<AbstractNode>){
+    this.nodeActionClasses.push(actionClass);
+  }
+
+  public connect(connectData: IConnect<AbstractNode>){
+    for(const actionClass of this.nodeActionClasses){
+      if(actionClass.instanceOf(connectData.parentNode)){
+        return actionClass.connectNode(connectData);
+      }
+    }
+    throw new Error(`No Action class registered for ${connectData.parentNode}`);
+  }
+  public disconnect(connectData: IConnect<AbstractNode>){
+    for(const actionClass of this.nodeActionClasses){
+      if(actionClass.instanceOf(connectData.parentNode)){
+        return actionClass.disconnectNode(connectData);
+      }
+    }
+    throw new Error(`No Action class registered for ${connectData.parentNode}`);
+  }
+}
+
 export interface IAbstractNode{
     id: string;
 }
@@ -29,6 +54,18 @@ export interface IChildNode extends IAbstractNode {
 
 export function instanceOfIChildNode(object: any): object is IChildNode{
     return ('parentNodeIDs' in object);
+}
+
+export interface IConnect<T extends IAbstractNode>{
+  parentNode: T;
+  childNodeID: string;
+  connectionKey: string;
+}
+
+export interface INodeActions<T extends IAbstractNode> {
+  instanceOf(node: IAbstractNode): boolean;
+  connectNode(connectionData: IConnect<T>): T;
+  disconnectNode(connectionData: IConnect<T>): T;
 }
 
 export default abstract class AbstractNode implements IAbstractNode{

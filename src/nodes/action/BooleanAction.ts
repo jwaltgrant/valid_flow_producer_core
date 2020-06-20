@@ -1,5 +1,6 @@
 import ActionNode, { IActionNode } from "./ActionNode";
 import { IBlockInstance } from "../../BlockInstance";
+import { IAbstractNode, IChildNode, IConnect, INodeActions } from "../AbstractNode";
 
 export interface IBooleanAction extends IActionNode {
   falseTargets: string[];
@@ -10,6 +11,42 @@ export enum BooleanConnectionKey{
     INPUT = 'i',
     FALSE = 'f',
     TRUE = 't'
+}
+
+export class BoolActions implements INodeActions<IBooleanAction>{
+    public instanceOf(node: IAbstractNode): boolean{
+        return ('falseTargets' in node) && ('trueTargets' in node);
+    }
+    public connectNode(connectionData: IConnect<IBooleanAction>){
+        const connections = this.getConnectionList(connectionData.parentNode, connectionData.connectionKey);
+        if(connections && !connections.includes(connectionData.childNodeID)){
+            connections.push(connectionData.childNodeID);
+        }
+        return {...connectionData.parentNode}
+    }
+
+    public disconnectNode(connectionData: IConnect<IBooleanAction>){
+        const connections = this.getConnectionList(
+        connectionData.parentNode,
+        connectionData.connectionKey
+        );
+        const index = connections.indexOf(connectionData.childNodeID);
+        if (index > -1) {
+        connections.splice(index, 1);
+        }
+        return {...connectionData.parentNode}
+    }
+
+    private getConnectionList(node: IBooleanAction, connectionKey: string): string[]{
+        switch(connectionKey){
+            case BooleanConnectionKey.INPUT:
+                return node.parentNodeIDs;
+            case BooleanConnectionKey.FALSE:
+                return node.falseTargets;
+            case BooleanConnectionKey.TRUE:
+                return node.trueTargets;
+        }
+    }
 }
 
 export default class BooleanAction extends ActionNode implements IBooleanAction{
