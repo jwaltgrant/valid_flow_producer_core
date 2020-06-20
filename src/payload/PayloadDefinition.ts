@@ -92,11 +92,11 @@ export function removeItem(payloadDefinition: IPayloadDefinition, name: string):
   let payloadItems = [...payloadDefinition.payloadItems];
   let dynamicKeys = [...payloadDefinition.dynamicKeys];
   let index = payloadDefinition.payloadItems.indexOf(findPayloadItem(payloadDefinition, name));
-  if(index >= -1){
+  if(index >= 0){
     payloadItems.splice(index, 1);
   } else{
     index = payloadDefinition.dynamicKeys.indexOf(findDynamicKey(payloadDefinition, name));
-    if(index >= -1){
+    if(index >= 0){
       dynamicKeys.splice(index, 1);
     }
   }
