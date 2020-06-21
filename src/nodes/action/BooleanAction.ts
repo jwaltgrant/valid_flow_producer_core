@@ -17,7 +17,7 @@ export class BoolActions implements INodeActions<IBooleanAction>{
     public instanceOf(node: IAbstractNode): boolean{
         return ('falseTargets' in node) && ('trueTargets' in node);
     }
-    public connectNode(connectionData: IConnect<IBooleanAction>){
+    public connectNode(connectionData: IConnect<IBooleanAction>): IBooleanAction{
         const connections = this.getConnectionList(connectionData.fromNode, connectionData.connectionKey);
         if(connections && !connections.includes(connectionData.toNodeID)){
             connections.push(connectionData.toNodeID);
@@ -25,7 +25,7 @@ export class BoolActions implements INodeActions<IBooleanAction>{
         return {...connectionData.fromNode}
     }
 
-    public disconnectNode(connectionData: IConnect<IBooleanAction>){
+    public disconnectNode(connectionData: IConnect<IBooleanAction>): IBooleanAction{
         const connections = this.getConnectionList(
         connectionData.fromNode,
         connectionData.connectionKey
