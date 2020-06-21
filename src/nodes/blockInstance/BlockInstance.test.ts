@@ -1,5 +1,5 @@
 import * as Block from './BlockInstance';
-import { IBlockDef } from '../BlockDef';
+import { IBlockDef } from '../../BlockDef';
 
 describe('Test Block Instance', () => {
     const blockSetKey = 'testSet';
@@ -38,7 +38,7 @@ describe('Test Block Instance', () => {
       returnType: "datetime",
     };
     test('From Block Def', () => {
-        let block1: Block.IBlockInstance = Block.fromBlockDef(blockSetKey, blockDef1);
+        let block1: Block.IBlockInstance = Block.fromBlockDef({blockSetKey, blockDef: blockDef1});
         let expected: Block.IBlockInstance = {
           blockSetKey: blockSetKey,
           blockKey: blockDef1.blockKey,
@@ -60,16 +60,16 @@ describe('Test Block Instance', () => {
         expect(block1).toEqual(expected);
         block1.returnKey = 'new return key';
         expected.returnKey = block1.returnKey;
-        let _block1 = Block.fromBlockDef(blockSetKey, blockDef1, block1);
+        let _block1 = Block.fromBlockDef({blockSetKey, blockDef: blockDef1, block: block1});
         expect(_block1).not.toBe(block1);
         expect(_block1).toEqual(expected);
     });
 
     test('Update Arg', () => {
-        let block2: Block.IBlockInstance = Block.fromBlockDef(
+        let block2: Block.IBlockInstance = Block.fromBlockDef({
           blockSetKey,
-          blockDef2
-        );
+          blockDef: blockDef2
+        });
         let expected: Block.IBlockInstance = {
             blockSetKey: blockSetKey,
             blockKey: blockDef2.blockKey,
