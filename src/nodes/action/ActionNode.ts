@@ -6,8 +6,8 @@ import AbstractNode, {
 import { IBlockInstance } from "../../BlockInstance";
 
 export interface IActionNode extends IAbstractNode, IChildNode {
-  readonly actionKey: string;
-  block: IBlockInstance;
+  readonly actionKey?: string;
+  block?: IBlockInstance;
   returnKey?: string;
 }
 

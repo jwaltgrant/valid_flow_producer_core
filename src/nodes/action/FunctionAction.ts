@@ -17,28 +17,28 @@ export class FunctionActions implements INodeActions<IFunctionAction> {
          }
          public connectNode(connectionData: IConnect<IFunctionAction>) {
            const connections = this.getConnectionList(
-             connectionData.parentNode,
+             connectionData.fromNode,
              connectionData.connectionKey
            );
            if (
              connections &&
-             !connections.includes(connectionData.childNodeID)
+             !connections.includes(connectionData.toNodeID)
            ) {
-             connections.push(connectionData.childNodeID);
+             connections.push(connectionData.toNodeID);
            }
-           return { ...connectionData.parentNode };
+           return { ...connectionData.fromNode };
          }
 
          public disconnectNode(connectionData: IConnect<IFunctionAction>) {
            const connections = this.getConnectionList(
-             connectionData.parentNode,
+             connectionData.fromNode,
              connectionData.connectionKey
            );
-           const index = connections.indexOf(connectionData.childNodeID);
+           const index = connections.indexOf(connectionData.toNodeID);
            if (index > -1) {
              connections.splice(index, 1);
            }
-           return { ...connectionData.parentNode };
+           return { ...connectionData.fromNode };
          }
 
          private getConnectionList(

@@ -9,19 +9,19 @@ export class NodeActionClassRegistry{
 
   public connect(connectData: IConnect<AbstractNode>){
     for(const actionClass of this.nodeActionClasses){
-      if(actionClass.instanceOf(connectData.parentNode)){
+      if(actionClass.instanceOf(connectData.fromNode)){
         return actionClass.connectNode(connectData);
       }
     }
-    throw new Error(`No Action class registered for ${connectData.parentNode}`);
+    throw new Error(`No Action class registered for ${connectData.fromNode}`);
   }
   public disconnect(connectData: IConnect<AbstractNode>){
     for(const actionClass of this.nodeActionClasses){
-      if(actionClass.instanceOf(connectData.parentNode)){
+      if(actionClass.instanceOf(connectData.fromNode)){
         return actionClass.disconnectNode(connectData);
       }
     }
-    throw new Error(`No Action class registered for ${connectData.parentNode}`);
+    throw new Error(`No Action class registered for ${connectData.fromNode}`);
   }
 }
 
@@ -57,8 +57,8 @@ export function instanceOfIChildNode(object: any): object is IChildNode{
 }
 
 export interface IConnect<T extends IAbstractNode>{
-  parentNode: T;
-  childNodeID: string;
+  fromNode: T;
+  toNodeID: string;
   connectionKey: string;
 }
 

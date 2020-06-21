@@ -18,23 +18,23 @@ export class BoolActions implements INodeActions<IBooleanAction>{
         return ('falseTargets' in node) && ('trueTargets' in node);
     }
     public connectNode(connectionData: IConnect<IBooleanAction>){
-        const connections = this.getConnectionList(connectionData.parentNode, connectionData.connectionKey);
-        if(connections && !connections.includes(connectionData.childNodeID)){
-            connections.push(connectionData.childNodeID);
+        const connections = this.getConnectionList(connectionData.fromNode, connectionData.connectionKey);
+        if(connections && !connections.includes(connectionData.toNodeID)){
+            connections.push(connectionData.toNodeID);
         }
-        return {...connectionData.parentNode}
+        return {...connectionData.fromNode}
     }
 
     public disconnectNode(connectionData: IConnect<IBooleanAction>){
         const connections = this.getConnectionList(
-        connectionData.parentNode,
+        connectionData.fromNode,
         connectionData.connectionKey
         );
-        const index = connections.indexOf(connectionData.childNodeID);
+        const index = connections.indexOf(connectionData.toNodeID);
         if (index > -1) {
         connections.splice(index, 1);
         }
-        return {...connectionData.parentNode}
+        return {...connectionData.fromNode}
     }
 
     private getConnectionList(node: IBooleanAction, connectionKey: string): string[]{
