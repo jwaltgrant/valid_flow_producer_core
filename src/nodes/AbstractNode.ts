@@ -1,13 +1,17 @@
 import { IBlockInstance } from "../BlockInstance";
 
 export class NodeActionClassRegistry{
-  private nodeActionClasses: INodeActions<AbstractNode>[];
+  private nodeActionClasses: INodeActions<IAbstractNode>[];
 
-  public registerNodeActionClass(actionClass: INodeActions<AbstractNode>){
+  constructor() {
+    this.nodeActionClasses = []
+  }
+
+  public registerNodeActionClass(actionClass: INodeActions<IAbstractNode>){
     this.nodeActionClasses.push(actionClass);
   }
 
-  public connect(connectData: IConnect<AbstractNode>){
+  public connect(connectData: IConnect<IAbstractNode>){
     for(const actionClass of this.nodeActionClasses){
       if(actionClass.instanceOf(connectData.fromNode)){
         return actionClass.connectNode(connectData);
@@ -15,7 +19,7 @@ export class NodeActionClassRegistry{
     }
     throw new Error(`No Action class registered for ${connectData.fromNode}`);
   }
-  public disconnect(connectData: IConnect<AbstractNode>){
+  public disconnect(connectData: IConnect<IAbstractNode>){
     for(const actionClass of this.nodeActionClasses){
       if(actionClass.instanceOf(connectData.fromNode)){
         return actionClass.disconnectNode(connectData);
