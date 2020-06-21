@@ -1,13 +1,12 @@
 import * as FuncAction from './FunctionAction';
 
 const actions = new FuncAction.FunctionActions();
-
+export const funcAction: FuncAction.IFunctionAction = {
+  targets: [],
+  parentNodeIDs: [],
+  id: "1",
+};
 describe('Test Function Actions', () => {
-    const funcAction: FuncAction.IFunctionAction = {
-        targets: [],
-        parentNodeIDs: [],
-        id: '1'
-    };
     test('Instannce Of', () => {
         const other: {parentNodeIDs: any[], id: string} = {
             parentNodeIDs: [],

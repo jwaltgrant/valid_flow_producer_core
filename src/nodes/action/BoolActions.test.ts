@@ -1,15 +1,16 @@
 import * as Bool from './BooleanAction';
 
 const actions = new Bool.BoolActions();
+export const boolAction: Bool.IBooleanAction = {
+  falseTargets: [],
+  trueTargets: [],
+  parentNodeIDs: [],
+  block: null,
+  id: "1",
+};
 
 describe('Bool Actions Tests', () => {
-    const boolAction: Bool.IBooleanAction = {
-        falseTargets: [],
-        trueTargets: [],
-        parentNodeIDs: [],
-        block: null,
-        id: '1'
-    };
+
 
     test('Instance Of', () => {
         const other: {parentNodeIDs: any[], id: string} = {

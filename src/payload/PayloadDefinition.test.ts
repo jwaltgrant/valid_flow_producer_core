@@ -114,8 +114,6 @@ test('Remove Item', () => {
     name = dynamic[dynamic.length - 1].name;
     expected = [...dynamic];
     expected.splice(dynamic.length - 1, 1);
-    console.log(name);
-    console.log(expected);
     expect(Payload.removeItem(payloadDef, name).dynamicKeys).toEqual(expected);
 });
 

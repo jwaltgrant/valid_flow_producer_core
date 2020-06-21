@@ -1,4 +1,6 @@
 import { IBlockInstance } from "../BlockInstance";
+import { FunctionActions } from "./action/FunctionAction";
+import { BoolActions } from "./action/BooleanAction";
 
 export class NodeActionClassRegistry{
   private nodeActionClasses: INodeActions<IAbstractNode>[];
@@ -29,6 +31,10 @@ export class NodeActionClassRegistry{
   }
 }
 
+export const defaultRegistry = new NodeActionClassRegistry();
+defaultRegistry.registerNodeActionClass(new FunctionActions());
+defaultRegistry.registerNodeActionClass(new BoolActions());
+
 export interface IAbstractNode{
     id: string;
 }
@@ -49,6 +55,61 @@ export function getAncenstorNodeIDs(forNode: IChildNode, allNodes: IAbstractNode
       }
     }
     return ancestors;
+}
+
+export function addNode(state: IAbstractNode[], node: IAbstractNode){
+  const _node = state.find((n) => n.id === node.id);
+  if(_node){
+    throw new Error(`Node ID: ${node.id} is taken`);
+  }
+  return [...state, node];
+}
+
+export function removeNode(state: IAbstractNode[], nodeID: string){
+  const node = state.find((n) => n.id === nodeID);
+  if(!node){
+    return state;
+  }
+  const index = state.indexOf(node);
+  state.splice(index, 1);
+  return [...state];
+}
+
+function findAndCD(
+  state: IAbstractNode[],
+  connectData: IConnect<IAbstractNode>,
+  connect: boolean
+): {state: IAbstractNode[], updated: boolean}{
+    const _node = state.find((n) => n.id === connectData.fromNode.id);
+    if (!_node) {
+      return {state, updated: false};
+    }
+    const index = state.indexOf(_node);
+    const connectedNode = connect ? defaultRegistry.connect(connectData): defaultRegistry.disconnect(connectData);
+    state.splice(index, 1, connectedNode);
+    return {state, updated: true};
+}
+
+export function connectNodes(
+  state: IAbstractNode[],
+  conenctData: IConnect<IAbstractNode>,
+): IAbstractNode[]{
+  const _do = findAndCD(state, conenctData, true);
+  if(_do.updated){
+    return [..._do.state];
+  }
+  return state;
+}
+
+export function disconnectNodes(
+  state: IAbstractNode[],
+  conenctData: IConnect<IAbstractNode>
+): IAbstractNode[] {
+  const _do = findAndCD(state, conenctData, false);
+  if (_do.updated) {
+    return [..._do.state];
+  }
+  return state;
 }
 
 export interface IChildNode extends IAbstractNode {
