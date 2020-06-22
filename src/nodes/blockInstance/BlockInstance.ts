@@ -1,5 +1,7 @@
 import { IBlockDef } from "../../BlockDef";
 import { IArgDef } from "../../ArgDef";
+import { IActionNode } from "../action/ActionNode";
+import { IAbstractNode } from "../AbstractNode";
 
 export interface IArgInstance {
   name: string;
@@ -20,7 +22,7 @@ export interface IBlockInstance {
   blockKey: string;
   args: IArgInstance[];
   returnType: string;
-  returnKey: string;
+  returnKey?: string;
 }
 
 export interface ISetBlock{

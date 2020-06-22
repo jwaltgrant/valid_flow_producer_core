@@ -4,6 +4,8 @@ import AbstractNode, {
   instanceOfIChildNode,
 } from "../AbstractNode";
 import { IBlockInstance } from "../../BlockInstance";
+import * as Block from "../blockInstance/BlockInstance";
+import { IBlockDef } from "../../BlockDef";
 
 export interface IActionNode extends IAbstractNode, IChildNode {
   readonly actionKey?: string;
@@ -49,4 +51,41 @@ export default abstract class ActionNode extends AbstractNode implements IAction
         actionKey: this.actionKey
       }
     }
+}
+
+export function updateBlock(
+  state: IAbstractNode[],
+  nodeID: string,
+  blockSetKey: string,
+  blockDef: IBlockDef
+) {
+  const node: IActionNode = state.find((n) => n.id === nodeID) as IActionNode;
+  if (!node || "block"! in node) {
+    return state;
+  }
+  const index = state.indexOf(node);
+  const block = Block.fromBlockDef({
+    blockSetKey,
+    blockDef,
+    block: node.block,
+  });
+  const _node = { ...node, block };
+  return [...state.splice(index, 1, _node)];
+}
+
+export function updateArg(
+  state: IAbstractNode[],
+  nodeID: string,
+  argInstance: Block.IArgInstance
+) {
+  const node: IActionNode = state.find((n) => n.id === nodeID) as IActionNode;
+  if (!node || "block"! in node) {
+    return state;
+  }
+  const index = state.indexOf(node);
+  const _node = {
+    ...node,
+    ...Block.updateArg(node.block, argInstance),
+  };
+  return [...state.splice(index, 1, _node)];
 }

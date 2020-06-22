@@ -1,5 +1,6 @@
 import {NODE_ACTIONS} from './actions';
 import * as Node from '../AbstractNode';
+import * as Action from '../action/ActionNode';
 
 const initialState: Node.IAbstractNode[] = []
 
@@ -19,6 +20,19 @@ export default function nodeStore(state: Node.IAbstractNode[] = initialState, ac
           state,
           action as Node.IConnect<Node.IAbstractNode>
         );
+      case NODE_ACTIONS.SET_BLOCK:
+        return Action.updateBlock(
+          state,
+          action.nodeID,
+          action.blockSetKey,
+          action.blockDef
+        );
+      case NODE_ACTIONS.SET_ARG:
+        return Action.updateArg(
+          state,
+          action.nodeID,
+          action.argInstance
+        )
       default:
         return state;
     }

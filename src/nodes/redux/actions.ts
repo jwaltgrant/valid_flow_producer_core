@@ -1,6 +1,7 @@
 import { IAbstractNode, IChildNode, IConnect } from "../AbstractNode";
 import { ISetBlock, IArgInstance } from "../blockInstance/BlockInstance";
 import { IBlockInstance } from "../blockInstance/BlockInstance";
+import { IBlockDef } from "../../BlockDef";
 
 export enum NODE_ACTIONS {
     CONNECT,
@@ -39,18 +40,20 @@ export function removeNode(nodeID: string){
     };
 }
 
-export function setBlock(nodeID: string, block: ISetBlock){
+
+export function setBlock(nodeID: string, blockSetKey: string, blockDef: IBlockDef){
     return {
         type: NODE_ACTIONS.SET_BLOCK,
         nodeID,
-        block
+        blockSetKey,
+        blockDef
     }
 }
 
-export function setArg(block: IBlockInstance, arg: IArgInstance){
+export function setArg(nodeID: string, argInstance: IArgInstance){
     return {
-        type: NODE_ACTIONS.SET_ARG,
-        block,
-        arg
-    }
+      type: NODE_ACTIONS.SET_ARG,
+      nodeID,
+      argInstance,
+    };
 }
