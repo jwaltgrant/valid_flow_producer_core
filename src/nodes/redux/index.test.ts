@@ -3,8 +3,10 @@ import * as Actions from './actions';
 import {boolAction} from '../action/BoolActions.test';
 import {funcAction as _funcAction} from '../action/FunctionAction.test';
 import { IAbstractNode } from '../AbstractNode';
-import { BooleanConnectionKey } from '../action/BooleanAction';
+import { BooleanConnectionKey, IBooleanAction } from '../action/BooleanAction';
 import { FunctionActionKey } from '../action/FunctionAction';
+import { IBlockDef } from '../../BlockDef';
+import { IArgInstance } from '../../ArgInstance';
 
 const funcAction = { ..._funcAction, id: "function_actiosn" };
 
@@ -24,6 +26,7 @@ describe('Node Reducer Tests', () => {
         }).toThrow();
         expect(state).toEqual([boolAction, funcAction]);
     });
+
     test('Remove Node', () => {
         state = nodeReducer(state, Actions.removeNode('3'));
         expect(state).toEqual([boolAction, funcAction]);
@@ -32,10 +35,10 @@ describe('Node Reducer Tests', () => {
         state = nodeReducer(state, Actions.removeNode(funcAction.id));
         expect(state).toEqual([]);        
     });
+
     test('Connect and Disconnect', () => {
         state = nodeReducer(state, Actions.addNode(boolAction));
         state = nodeReducer(state, Actions.addNode(funcAction));
-        const init = state;
         let connectedBool = {...boolAction, falseTargets: [funcAction.id]};
         let connectedFunc = {...funcAction, parentNodeIDs: [boolAction.id]};
         state = nodeReducer(state, Actions.connectNode({
@@ -69,7 +72,52 @@ describe('Node Reducer Tests', () => {
           { ...boolAction, falseTargets: [] },
           {...connectedFunc, parentNodeIDs: []},
         ]);
-        expect(state).not.toBe(init);
-    })
+    });
+
+    test('Test Set Block and Update Args', () => {
+        const blockDef1: IBlockDef = {
+            blockKey: "testKey",
+            uiString: "test1",
+            args: [
+            {
+                name: "arg1",
+                type: "string",
+                default: "Hello",
+            },
+            {
+                name: "arg2",
+                type: "number",
+                default: 7,
+            },
+            ],
+            returnType: "number",
+        };
+        const expectedBlock: IBooleanAction = {
+          falseTargets: [],
+          trueTargets: [],
+          parentNodeIDs: [],
+          block: {
+            blockSetKey: "Test",
+            blockKey: "testKey",
+            args: [
+              { name: "arg1", value: "Hello", payloadElement: false },
+              { name: "arg2", value: 7, payloadElement: false },
+            ],
+            returnType: "number",
+            returnKey: "",
+          },
+          id: "1",
+        };
+        state = nodeReducer(state, Actions.setBlock(boolAction.id, 'Test', blockDef1));
+        expect(state[0]).toEqual(expectedBlock);
+        const newArg: IArgInstance = {
+            name: "arg1",
+            value: "newValue",
+            payloadElement: true
+        };
+        expectedBlock.block.args.splice(0,1,newArg);
+        state = nodeReducer(state, Actions.setArg(boolAction.id, newArg));
+        expect(state[0]).toEqual(expectedBlock);
+    });
 });
 

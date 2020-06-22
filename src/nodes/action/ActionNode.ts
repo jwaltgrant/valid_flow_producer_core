@@ -3,24 +3,23 @@ import AbstractNode, {
   IChildNode,
   instanceOfIChildNode,
 } from "../AbstractNode";
-import { IBlockInstance } from "../../BlockInstance";
 import * as Block from "../blockInstance/BlockInstance";
 import { IBlockDef } from "../../BlockDef";
 
 export interface IActionNode extends IAbstractNode, IChildNode {
   readonly actionKey?: string;
-  block?: IBlockInstance;
+  block?: Block.IBlockInstance;
   returnKey?: string;
 }
 
 export default abstract class ActionNode extends AbstractNode implements IActionNode{
     abstract readonly actionKey: string;
-    block: IBlockInstance;
+    block: Block.IBlockInstance;
     returnKey?: string;
     parentNodeIDs: string[];
 
 
-    constructor(id: string, parentNodeIDs: string[] = [], block?: IBlockInstance, returnKey?: string){
+    constructor(id: string, parentNodeIDs: string[] = [], block?: Block.IBlockInstance, returnKey?: string){
         super(id);
         this.block = block;
         this.returnKey = returnKey;
@@ -60,7 +59,7 @@ export function updateBlock(
   blockDef: IBlockDef
 ) {
   const node: IActionNode = state.find((n) => n.id === nodeID) as IActionNode;
-  if (!node || "block"! in node) {
+  if (!node || !("block" in node)) {
     return state;
   }
   const index = state.indexOf(node);
@@ -70,7 +69,8 @@ export function updateBlock(
     block: node.block,
   });
   const _node = { ...node, block };
-  return [...state.splice(index, 1, _node)];
+  state.splice(index, 1, _node);
+  return [...state];
 }
 
 export function updateArg(
@@ -79,13 +79,14 @@ export function updateArg(
   argInstance: Block.IArgInstance
 ) {
   const node: IActionNode = state.find((n) => n.id === nodeID) as IActionNode;
-  if (!node || "block"! in node) {
+  if (!node || !("block" in node)) {
     return state;
   }
   const index = state.indexOf(node);
   const _node = {
     ...node,
-    ...Block.updateArg(node.block, argInstance),
+    block: Block.updateArg(node.block, argInstance),
   };
-  return [...state.splice(index, 1, _node)];
+  state.splice(index, 1, _node)
+  return [...state];
 }
