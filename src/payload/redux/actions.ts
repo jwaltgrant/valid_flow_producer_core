@@ -3,13 +3,13 @@ import IDynamicKey from "../DynamicKey";
 
 
 export enum PAYLOAD_ACTIONS{
-    ADD_ITEM,
-    REMOVE_ITEM,
-    ADD_DYANMIC_KEY,
-    REMOVE_DYNAMIC_KEY,
-    CHANGE_KEY,
-    CHANGE_TYPE,
-    CLEAR
+    ADD_ITEM = 'add_item',
+    REMOVE_ITEM = 'rm_item',
+    ADD_DYANMIC_KEY = 'add_d_key',
+    REMOVE_DYNAMIC_KEY = 'rm_d_key',
+    CHANGE_KEY = 'ch_key',
+    CHANGE_TYPE = 'ch_type',
+    CLEAR = 'cl'
 }
 
 export function addItem(item: IFieldDef){
