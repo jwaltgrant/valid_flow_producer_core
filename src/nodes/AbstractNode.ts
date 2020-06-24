@@ -62,7 +62,8 @@ export function addNode(state: IAbstractNode[], node: IAbstractNode){
   if(_node){
     throw new Error(`Node ID: ${node.id} is taken`);
   }
-  return [...state, node];
+  state.push(node);
+  return [...state];
 }
 
 export function removeNode(state: IAbstractNode[], nodeID: string){
