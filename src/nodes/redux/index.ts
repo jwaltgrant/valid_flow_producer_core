@@ -33,6 +33,12 @@ export default function nodeStore(state: Node.IAbstractNode[] = initialState, ac
           action.nodeID,
           action.argInstance
         )
+      case NODE_ACTIONS.SET_RETURN_KEY:
+        return Action.setReturnKey(
+          state,
+          action.nodeID,
+          action.returnKey
+        );
       default:
         return state;
     }

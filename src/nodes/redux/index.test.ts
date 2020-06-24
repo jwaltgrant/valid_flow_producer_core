@@ -7,6 +7,7 @@ import { BooleanConnectionKey, IBooleanAction } from '../action/BooleanAction';
 import { FunctionActionKey } from '../action/FunctionAction';
 import { IBlockDef } from '../../BlockDef';
 import { IArgInstance } from '../../ArgInstance';
+import ActionNode from '../action/ActionNode';
 
 const funcAction = { ..._funcAction, id: "function_actiosn" };
 
@@ -118,6 +119,11 @@ describe('Node Reducer Tests', () => {
         expectedBlock.block.args.splice(0,1,newArg);
         state = nodeReducer(state, Actions.setArg(boolAction.id, newArg));
         expect(state[0]).toEqual(expectedBlock);
+    });
+    test('Test Set Return Key', () => {
+        const testKey = 'testKey';
+        state = nodeReducer(state, Actions.setReturnKey(boolAction.id, testKey));
+        expect((state[0] as ActionNode).returnKey).toEqual(testKey);
     });
 });
 

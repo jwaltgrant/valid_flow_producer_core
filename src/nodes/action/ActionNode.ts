@@ -52,6 +52,14 @@ export default abstract class ActionNode extends AbstractNode implements IAction
     }
 }
 
+function findActionNode(state: IAbstractNode[], nodeID: string): IActionNode | null{
+  const node: IActionNode = state.find((n) => n.id === nodeID) as IActionNode;
+  if (!node || !("block" in node)) {
+    return null;
+  }
+  return node;
+}
+
 export function updateBlock(
   state: IAbstractNode[],
   nodeID: string,
@@ -78,8 +86,8 @@ export function updateArg(
   nodeID: string,
   argInstance: Block.IArgInstance
 ) {
-  const node: IActionNode = state.find((n) => n.id === nodeID) as IActionNode;
-  if (!node || !("block" in node)) {
+  const node = findActionNode(state, nodeID);
+  if(!node){
     return state;
   }
   const index = state.indexOf(node);
@@ -88,5 +96,23 @@ export function updateArg(
     block: Block.updateArg(node.block, argInstance),
   };
   state.splice(index, 1, _node)
+  return [...state];
+}
+
+export function setReturnKey(
+  state: IAbstractNode[],
+  nodeID: string,
+  returnKey: string | null
+) {
+  const node = findActionNode(state, nodeID);
+  if (!node) {
+    return state;
+  }
+  const index = state.indexOf(node);
+  const _node = {
+    ...node,
+    returnKey
+  };
+  state.splice(index, 1, _node);
   return [...state];
 }

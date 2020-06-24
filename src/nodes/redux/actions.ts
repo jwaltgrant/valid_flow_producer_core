@@ -4,12 +4,13 @@ import { IBlockInstance } from "../blockInstance/BlockInstance";
 import { IBlockDef } from "../../BlockDef";
 
 export enum NODE_ACTIONS {
-    CONNECT,
-    DISCONNECT,
-    ADD_NODE,
-    REMOVE_NODE,
-    SET_BLOCK,
-    SET_ARG
+  CONNECT = "na_connect",
+  DISCONNECT = "na_disconnect",
+  ADD_NODE = "na_add_node",
+  REMOVE_NODE = "na_rm_node",
+  SET_BLOCK = "na_set_block",
+  SET_ARG = "na_set_arg",
+  SET_RETURN_KEY = "na_set_ret_key",
 }
 
 export function connectNode(connectionData: IConnect<IAbstractNode>){
@@ -56,4 +57,12 @@ export function setArg(nodeID: string, argInstance: IArgInstance){
       nodeID,
       argInstance,
     };
+}
+
+export function setReturnKey(nodeID: string, returnKey: string | null){
+    return {
+        type: NODE_ACTIONS.SET_RETURN_KEY,
+        nodeID,
+        returnKey
+    }
 }
