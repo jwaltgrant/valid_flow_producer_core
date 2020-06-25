@@ -1,8 +1,15 @@
-import { IActionNode } from "./ActionNode";
+import { IActionNode, initActionNode } from "./ActionNode";
 import { INodeActions, IAbstractNode, IConnect } from "../AbstractNode";
 
 export interface IFunctionAction extends IActionNode{
     targets: string[];
+}
+
+export function initFunctionAction(): IFunctionAction {
+  return {
+    ...initActionNode("FUNC"),
+    targets: []
+  }
 }
 
 export enum FunctionActionKey{
