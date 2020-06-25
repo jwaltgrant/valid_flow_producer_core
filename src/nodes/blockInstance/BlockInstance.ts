@@ -1,7 +1,5 @@
-import { IBlockDef } from "../../BlockDef";
-import { IArgDef } from "../../ArgDef";
-import { IActionNode } from "../action/ActionNode";
-import { IAbstractNode } from "../AbstractNode";
+import { IBlockDef } from "./BlockDef";
+import { IArgDef } from "./ArgDef";
 
 export interface IArgInstance {
   name: string;

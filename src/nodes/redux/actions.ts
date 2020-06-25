@@ -1,7 +1,7 @@
 import { IAbstractNode, IChildNode, IConnect } from "../AbstractNode";
 import { ISetBlock, IArgInstance } from "../blockInstance/BlockInstance";
 import { IBlockInstance } from "../blockInstance/BlockInstance";
-import { IBlockDef } from "../../BlockDef";
+import { IBlockDef } from "../blockInstance/BlockDef";
 
 export enum NODE_ACTIONS {
   CONNECT = "na_connect",

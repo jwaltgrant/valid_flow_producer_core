@@ -1,4 +1,4 @@
-import { IBlockDef } from "./BlockDef";
+import { IBlockDef } from "./nodes/blockInstance/BlockDef";
 
 interface IBlockSet {
   blockSetKey: string;

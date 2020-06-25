@@ -4,7 +4,7 @@ import {
   instanceOfIChildNode,
 } from "../AbstractNode";
 import * as Block from "../blockInstance/BlockInstance";
-import { IBlockDef } from "../../BlockDef";
+import { IBlockDef } from "../blockInstance/BlockDef";
 
 export interface IActionNode extends IAbstractNode, IChildNode {
   readonly actionKey?: string;

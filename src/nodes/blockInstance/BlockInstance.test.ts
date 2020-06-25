@@ -1,5 +1,5 @@
 import * as Block from './BlockInstance';
-import { IBlockDef } from '../../BlockDef';
+import { IBlockDef } from './BlockDef';
 
 describe('Test Block Instance', () => {
     const blockSetKey = 'testSet';
