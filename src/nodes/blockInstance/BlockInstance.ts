@@ -42,10 +42,8 @@ export function fromBlockDef(
       blockSetKey: block.blockSetKey,
       blockKey: block.blockDef.blockKey,
       args: block.blockDef.args.map(mapFromArgDef),
-      returnType: block.blockDef.returnType,
-      returnKey: "",
     };
-    return block.block ? {..._block, returnKey: block.block.returnKey} : _block;
+    return block.block ? block.block : _block;
 }
 
 export function updateArg(block: IBlockInstance, argInstance: IArgInstance){
