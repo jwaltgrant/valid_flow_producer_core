@@ -1,6 +1,6 @@
 import { IBlockDef } from "./nodes/blockInstance/BlockDef";
 
-interface IBlockSet {
+export default interface IBlockSet {
   blockSetKey: string;
   blocks: IBlockDef[];
 }
