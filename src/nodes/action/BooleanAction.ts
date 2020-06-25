@@ -1,9 +1,17 @@
-import { IActionNode } from "./ActionNode";
+import { IActionNode, initActionNode } from "./ActionNode";
 import { IAbstractNode, IConnect, INodeActions } from "../AbstractNode";
 
 export interface IBooleanAction extends IActionNode {
   falseTargets: string[];
   trueTargets: string[];
+}
+
+export function initBooleanAction(): IBooleanAction {
+    return {
+        ...initActionNode('BOOLEAN'),
+        falseTargets: [],
+        trueTargets: []
+    }
 }
 
 export enum BooleanConnectionKey{

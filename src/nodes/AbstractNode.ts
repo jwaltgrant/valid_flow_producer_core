@@ -1,4 +1,3 @@
-import { IBlockInstance } from "../BlockInstance";
 import { FunctionActions } from "./action/FunctionAction";
 import { BoolActions } from "./action/BooleanAction";
 
@@ -37,6 +36,10 @@ defaultRegistry.registerNodeActionClass(new BoolActions());
 
 export interface IAbstractNode{
     id: string;
+}
+
+export function initAbstractNode(): IAbstractNode {
+  return {id: ''};
 }
 
 /**
@@ -111,6 +114,13 @@ export function disconnectNodes(
     return [..._do.state];
   }
   return state;
+}
+
+export function initChildNode(): IChildNode {
+  return {
+    ...initAbstractNode(),
+    parentNodeIDs: []
+  };
 }
 
 export interface IChildNode extends IAbstractNode {

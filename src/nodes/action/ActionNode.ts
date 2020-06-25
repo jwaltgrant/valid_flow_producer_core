@@ -1,15 +1,24 @@
 import {
   IAbstractNode,
   IChildNode,
-  instanceOfIChildNode,
+  initChildNode
 } from "../AbstractNode";
 import * as Block from "../blockInstance/BlockInstance";
 import { IBlockDef } from "../blockInstance/BlockDef";
 
-export interface IActionNode extends IAbstractNode, IChildNode {
+export interface IActionNode extends IChildNode {
   readonly actionKey?: string;
   block?: Block.IBlockInstance;
   returnKey?: string;
+}
+
+export function initActionNode(actionKey: string): IActionNode {
+  return {
+    ...initChildNode(),
+    actionKey,
+    block: Block.initBlockInstance(),
+    returnKey: ''
+  }
 }
 
 function findActionNode(state: IAbstractNode[], nodeID: string): IActionNode | null{

@@ -15,12 +15,18 @@ function mapFromArgDef(argDef: IArgDef): IArgInstance{
     };
 }
 
+export function initBlockInstance(): IBlockInstance {
+    return {
+        blockSetKey: '',
+        blockKey: '',
+        args: []
+    }
+}
+
 export interface IBlockInstance {
   blockSetKey: string;
   blockKey: string;
   args: IArgInstance[];
-  returnType: string;
-  returnKey?: string;
 }
 
 export interface ISetBlock{
