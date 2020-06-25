@@ -115,7 +115,6 @@ export function disconnectNodes(
 
 export interface IChildNode extends IAbstractNode {
   parentNodeIDs: string[];
-  getAncenstorNodeIDs?: (nodes: AbstractNode[]) => string[];
 }
 
 export function instanceOfIChildNode(object: any): object is IChildNode{
@@ -132,21 +131,4 @@ export interface INodeActions<T extends IAbstractNode> {
   instanceOf(node: IAbstractNode): boolean;
   connectNode(connectionData: IConnect<T>): T;
   disconnectNode(connectionData: IConnect<T>): T;
-}
-
-export default abstract class AbstractNode implements IAbstractNode{
-    id: string;
-    displayLabel: string;
-    abstract addConnection(toId: string, connectionKey: string): void;
-    abstract removeConnection(fromId: string, connectionKey: string): void;
-
-    constructor(id: string){
-        this.id = id;
-    }
-
-    serialize(): IAbstractNode{
-        return {
-            id: this.id
-        }
-    }
 }

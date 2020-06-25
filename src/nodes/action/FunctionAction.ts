@@ -1,5 +1,4 @@
-import ActionNode, { IActionNode } from "./ActionNode";
-import { IBlockInstance } from "../../BlockInstance";
+import { IActionNode } from "./ActionNode";
 import { INodeActions, IAbstractNode, IConnect } from "../AbstractNode";
 
 export interface IFunctionAction extends IActionNode{

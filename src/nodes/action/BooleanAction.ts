@@ -1,6 +1,5 @@
-import ActionNode, { IActionNode } from "./ActionNode";
-import { IBlockInstance } from "../../BlockInstance";
-import { IAbstractNode, IChildNode, IConnect, INodeActions } from "../AbstractNode";
+import { IActionNode } from "./ActionNode";
+import { IAbstractNode, IConnect, INodeActions } from "../AbstractNode";
 
 export interface IBooleanAction extends IActionNode {
   falseTargets: string[];

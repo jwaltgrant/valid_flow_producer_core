@@ -1,7 +1,7 @@
 import IFieldDef from "../FieldDef";
 import IDyamicKey from "./DynamicKey";
 import { PayloadDefinitionError, PayloadErrorCode } from "../Errors";
-import AbstractNode, { IChildNode, IAbstractNode, getAncenstorNodeIDs } from "../nodes/AbstractNode";
+import { IChildNode, IAbstractNode, getAncenstorNodeIDs } from "../nodes/AbstractNode";
 import IDynamicKey from "./DynamicKey";
 
 export interface IPayloadDefinition {
