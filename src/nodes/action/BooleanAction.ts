@@ -55,3 +55,6 @@ export class BoolActions implements INodeActions<IBooleanAction>{
         }
     }
 }
+
+const actions = new BoolActions();
+export default actions;

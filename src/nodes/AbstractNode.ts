@@ -1,5 +1,5 @@
-import { FunctionActions } from "./action/FunctionAction";
-import { BoolActions } from "./action/BooleanAction";
+import FunctionActions from "./action/FunctionAction";
+import BoolActions from "./action/BooleanAction";
 
 export class NodeActionClassRegistry{
   private nodeActionClasses: INodeActions<IAbstractNode>[];
@@ -31,8 +31,8 @@ export class NodeActionClassRegistry{
 }
 
 export const defaultRegistry = new NodeActionClassRegistry();
-defaultRegistry.registerNodeActionClass(new FunctionActions());
-defaultRegistry.registerNodeActionClass(new BoolActions());
+defaultRegistry.registerNodeActionClass(FunctionActions);
+defaultRegistry.registerNodeActionClass(BoolActions);
 
 export interface IAbstractNode{
     id: string;

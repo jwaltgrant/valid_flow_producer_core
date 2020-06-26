@@ -59,3 +59,7 @@ export class FunctionActions implements INodeActions<IFunctionAction> {
     }
   }
 }
+
+const actions = new FunctionActions();
+
+export default actions;
