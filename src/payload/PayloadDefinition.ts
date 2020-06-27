@@ -1,8 +1,13 @@
 import IFieldDef from "../FieldDef";
 import IDyamicKey from "./DynamicKey";
 import { PayloadDefinitionError, PayloadErrorCode } from "../Errors";
-import { IChildNode, IAbstractNode, getAncenstorNodeIDs } from "../nodes/AbstractNode";
+import {
+  IChildNode,
+  IAbstractNode,
+  getAncenstorNodes,
+} from "../nodes/AbstractNode";
 import IDynamicKey from "./DynamicKey";
+import { IActionNode } from "../nodes/action/ActionNode";
 
 export interface IPayloadDefinition {
   payloadItems: IFieldDef[];
@@ -118,10 +123,10 @@ export function getAvailablePayloadItems(
   nodes: IAbstractNode[]
 ): IFieldDef[] {
   let payloadItems: IFieldDef[] = [...payloadDefinition.payloadItems];
-  const nodeAncestors = getAncenstorNodeIDs(node, nodes);
-  for (const dynamicKey of payloadDefinition.dynamicKeys) {
-    if (nodeAncestors.includes(dynamicKey.nodeID)) {
-      payloadItems.push(dynamicKey);
+  const nodeAncestors = getAncenstorNodes(node, nodes);
+  for(const node of nodeAncestors){
+    if((node as IActionNode).returnKey){
+      payloadItems.push({ name: (node as IActionNode).returnKey, type: "any" });
     }
   }
   return payloadItems;

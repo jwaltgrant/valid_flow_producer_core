@@ -112,16 +112,20 @@ export function initAbstractNode(): IAbstractNode {
  * @param allNodes All Available nodes
  */
 export function getAncenstorNodeIDs(forNode: IChildNode, allNodes: IAbstractNode[]){
-    let ancestors: string[] = [...forNode.parentNodeIDs];
-    for (const node of allNodes) {
-      if (
-        forNode.parentNodeIDs.indexOf(node.id) > -1 &&
-        instanceOfIChildNode(node)
-      ) {
-        ancestors.push(...getAncenstorNodeIDs(node, allNodes));
-      }
+  return getAncenstorNodes(forNode, allNodes).map((n) => n.id);
+}
+
+export function getAncenstorNodes(forNode: IChildNode, allNodes: IAbstractNode[]): IAbstractNode[]{
+  let ancestors: IAbstractNode[] = allNodes.filter((node) => forNode.parentNodeIDs.includes(node.id));
+  for (const node of allNodes) {
+    if (
+      forNode.parentNodeIDs.indexOf(node.id) > -1 &&
+      instanceOfIChildNode(node)
+    ) {
+      ancestors.push(...getAncenstorNodes(node, allNodes));
     }
-    return ancestors;
+  }
+  return ancestors;
 }
 
 export function addNode(state: IAbstractNode[], node: IAbstractNode){
