@@ -1,5 +1,5 @@
 import { IActionNode, initActionNode } from "./ActionNode";
-import { IAbstractNode, IConnect, INodeActions } from "../AbstractNode";
+import { INodeActions, IAbstractNode, IConnect } from "../AbstractNode";
 
 export interface IBooleanAction extends IActionNode {
   falseTargets: string[];
