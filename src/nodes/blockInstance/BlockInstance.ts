@@ -1,4 +1,4 @@
-import { IBlockDef } from "./BlockDef";
+import { IBlockDef } from "./IBlockSet";
 import { IArgDef } from "./ArgDef";
 
 export interface IArgInstance {

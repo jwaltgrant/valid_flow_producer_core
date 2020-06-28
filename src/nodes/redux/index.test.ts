@@ -5,7 +5,7 @@ import {funcAction as _funcAction} from '../action/FunctionAction.test';
 import { IAbstractNode } from '../AbstractNode';
 import { BooleanConnectionKey, IBooleanAction } from '../action/BooleanAction';
 import { FunctionActionKey } from '../action/FunctionAction';
-import { IBlockDef } from '../blockInstance/BlockDef';
+import { IBlockDef } from '../blockInstance/IBlockSet';
 import { IArgInstance } from '../../ArgInstance';
 import { IActionNode } from '../action/ActionNode';
 
