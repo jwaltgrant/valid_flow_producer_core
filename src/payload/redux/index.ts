@@ -35,6 +35,20 @@ export default function payloadState(state = initialState, action: any): IPayloa
                 invalidKey: action.dynamicKey.name,
               };
           }
+      case PAYLOAD_ACTIONS.REPLACE_ITEM:
+        const item = state.payloadItems.find((i) => i.name === action.oldName);
+        if(!item) {
+          return {
+            ...state,
+            payloadItems: [...state.payloadItems, action.newItem]
+          };
+        }
+        const index = state.payloadItems.indexOf(item);
+        state.payloadItems.splice(index, 1, action.newItem);
+        return {
+          ...state,
+          payloadItems: [...state.payloadItems]
+        };
       case PAYLOAD_ACTIONS.REMOVE_ITEM:
       case PAYLOAD_ACTIONS.REMOVE_DYNAMIC_KEY:
         return {...state, ...Payload.removeItem(state, action.name)};

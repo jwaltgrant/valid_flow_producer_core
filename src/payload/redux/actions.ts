@@ -5,6 +5,7 @@ import IDynamicKey from "../DynamicKey";
 export enum PAYLOAD_ACTIONS{
     ADD_ITEM = 'add_item',
     REMOVE_ITEM = 'rm_item',
+    REPLACE_ITEM = 'rep_item',
     ADD_DYANMIC_KEY = 'add_d_key',
     REMOVE_DYNAMIC_KEY = 'rm_d_key',
     CHANGE_KEY = 'ch_key',
@@ -24,6 +25,14 @@ export function removeItem(name: string){
       type: PAYLOAD_ACTIONS.REMOVE_ITEM,
       name,
     };
+}
+
+export function replaceItem(oldName: string, newItem: IFieldDef){
+    return {
+        type: PAYLOAD_ACTIONS.REPLACE_ITEM,
+        oldName,
+        newItem
+    }
 }
 
 export function addDynamicKey(dynamicKey: IDynamicKey){
