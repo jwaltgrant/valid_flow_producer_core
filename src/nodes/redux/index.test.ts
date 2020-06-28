@@ -3,7 +3,7 @@ import * as Actions from './actions';
 import {boolAction} from '../action/BoolActions.test';
 import {funcAction as _funcAction} from '../action/FunctionAction.test';
 import { IAbstractNode } from '../AbstractNode';
-import { BooleanConnectionKey, IBooleanAction } from '../action/BooleanAction';
+import { BooleanConnectionKey, IBooleanAction } from '../AbstractNode';
 import { FunctionActionKey } from '../action/FunctionAction';
 import { IBlockDef } from '../blockInstance/IBlockSet';
 import { IArgInstance } from '../../ArgInstance';
@@ -103,9 +103,7 @@ describe('Node Reducer Tests', () => {
             args: [
               { name: "arg1", value: "Hello", payloadElement: false },
               { name: "arg2", value: 7, payloadElement: false },
-            ],
-            returnType: "number",
-            returnKey: "",
+            ]
           },
           id: "1",
         };

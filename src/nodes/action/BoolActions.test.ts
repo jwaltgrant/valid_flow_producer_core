@@ -1,4 +1,4 @@
-import * as Bool from './BooleanAction';
+import * as Bool from "../AbstractNode";
 
 const actions = new Bool.BoolActions();
 export const boolAction: Bool.IBooleanAction = {

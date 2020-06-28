@@ -53,15 +53,10 @@ describe('Test Block Instance', () => {
               value: 7,
               payloadElement: false,
             },
-          ],
-          returnType: blockDef1.returnType,
-          returnKey: "",
+          ]
         };
         expect(block1).toEqual(expected);
-        block1.returnKey = 'new return key';
-        expected.returnKey = block1.returnKey;
         let _block1 = Block.fromBlockDef({blockSetKey, blockDef: blockDef1, block: block1});
-        expect(_block1).not.toBe(block1);
         expect(_block1).toEqual(expected);
     });
 
@@ -84,9 +79,7 @@ describe('Test Block Instance', () => {
                 value: 7,
                 payloadElement: false,
             },
-            ],
-            returnType: blockDef2.returnType,
-            returnKey: "",
+            ]
         };
         expect(block2).toEqual(expected);
         

@@ -1,7 +1,6 @@
 import {IAbstractNode, getAncenstorNodeIDs, IChildNode} from './AbstractNode';
 import * as Node from './AbstractNode';
 import * as Func from "./action/FunctionAction";
-import * as Bool from './action/BooleanAction';
 
 export const inputNode: IAbstractNode = {
     id: '1'
@@ -32,7 +31,7 @@ test('Ancenstors are 1, 2, and 4', () => {
     const ancenstors = getAncenstorNodeIDs(childNodes[3], allNodes);
     expect(ancenstors).toEqual(['4', '2', '1'])
 });
-const boolAction: Bool.IBooleanAction = {
+const boolAction: Node.IBooleanAction = {
   falseTargets: [],
   trueTargets: [],
   parentNodeIDs: [],
@@ -50,13 +49,13 @@ const funcAction: Func.IFunctionAction = {
 describe('Node Action Registry Tests', () => {
     const actions = new Node.NodeActionClassRegistry();
     actions.registerNodeActionClass(new Func.FunctionActions());
-    actions.registerNodeActionClass(new Bool.BoolActions());
+    actions.registerNodeActionClass(new Node.BoolActions());
     test("Add/Remove Bool from registry", () => {
         expect(
             actions.connect({
             fromNode: boolAction,
             toNodeID: "3",
-            connectionKey: Bool.BooleanConnectionKey.INPUT,
+            connectionKey: Node.BooleanConnectionKey.INPUT,
             })
         ).toEqual({
             falseTargets: [],
@@ -69,7 +68,7 @@ describe('Node Action Registry Tests', () => {
         actions.connect({
           fromNode: boolAction,
           toNodeID: "4",
-          connectionKey: Bool.BooleanConnectionKey.FALSE,
+          connectionKey: Node.BooleanConnectionKey.FALSE,
         })
       ).toEqual({
         falseTargets: ["4"],
@@ -82,7 +81,7 @@ describe('Node Action Registry Tests', () => {
         actions.connect({
           fromNode: boolAction,
           toNodeID: "5",
-          connectionKey: Bool.BooleanConnectionKey.TRUE,
+          connectionKey: Node.BooleanConnectionKey.TRUE,
         })
       ).toEqual({
         falseTargets: ["4"],
@@ -95,7 +94,7 @@ describe('Node Action Registry Tests', () => {
     actions.disconnect({
         fromNode: boolAction,
         toNodeID: "3",
-        connectionKey: Bool.BooleanConnectionKey.INPUT,
+        connectionKey: Node.BooleanConnectionKey.INPUT,
     })
     ).toEqual({
     falseTargets: ["4"],
@@ -108,7 +107,7 @@ describe('Node Action Registry Tests', () => {
     actions.disconnect({
         fromNode: boolAction,
         toNodeID: "4",
-        connectionKey: Bool.BooleanConnectionKey.FALSE,
+        connectionKey: Node.BooleanConnectionKey.FALSE,
     })
     ).toEqual({
     falseTargets: [],
@@ -121,7 +120,7 @@ describe('Node Action Registry Tests', () => {
     actions.disconnect({
         fromNode: boolAction,
         toNodeID: "5",
-        connectionKey: Bool.BooleanConnectionKey.TRUE,
+        connectionKey: Node.BooleanConnectionKey.TRUE,
     })
     ).toEqual({
     falseTargets: [],
