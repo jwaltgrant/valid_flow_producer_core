@@ -1,6 +1,5 @@
-import { IAbstractNode, IChildNode, IConnect } from "../AbstractNode";
-import { ISetBlock, IArgInstance } from "../blockInstance/BlockInstance";
-import { IBlockInstance } from "../blockInstance/BlockInstance";
+import { IAbstractNode, IConnect } from "../AbstractNode";
+import { IArgInstance } from "../blockInstance/BlockInstance";
 import { IBlockDef } from "../blockInstance/IBlockSet";
 
 export enum NODE_ACTIONS {
