@@ -1,5 +1,6 @@
-import { IBlockDef } from "./IBlockSet";
+
 import { IArgDef } from "./ArgDef";
+import { IBlockDef } from "./IBlockSet";
 
 export interface IArgInstance {
   name: string;
@@ -38,12 +39,19 @@ export interface ISetBlock{
 export function fromBlockDef(
     block: ISetBlock
 ): IBlockInstance {
-    const _block: IBlockInstance = {
+    let _block: IBlockInstance = {
       blockSetKey: block.blockSetKey,
-      blockKey: block.blockDef.blockKey,
-      args: block.blockDef.args.map(mapFromArgDef),
+      blockKey: '',
+      args: [],
     };
-    return block.block ? block.block : _block;
+    if(block.blockDef){
+        _block = {
+          ..._block,
+          blockKey: block.blockDef.blockKey,
+          args: block.blockDef.args.map(mapFromArgDef),
+        };
+    }
+    return _block;
 }
 
 export function updateArg(block: IBlockInstance, argInstance: IArgInstance){
