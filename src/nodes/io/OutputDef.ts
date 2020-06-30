@@ -1,9 +1,5 @@
 export interface IOutputDef {
-    outputPairs: OutputPair[];
-}
-
-export default class OutputDef{
-    outputPairs: OutputPair[];
+    outputPairs: IOutputPair[];
 }
 
 export function initOutputDef(): IOutputDef{
@@ -12,14 +8,14 @@ export function initOutputDef(): IOutputDef{
     }
 }
 
-export class OutputPair{
+export interface IOutputPair{
     key: string;
     payloadElemet: boolean;
-    literalDef?: LiteralOutputDef;
+    literalDef?: ILiteralOutputDef;
     payloadKey?: string;
 }
 
-export class LiteralOutputDef{
+export interface ILiteralOutputDef{
     type: string;
     value: any;
 }
