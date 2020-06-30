@@ -1,7 +1,15 @@
-export interface IOutputDef {}
+export interface IOutputDef {
+    outputPairs: OutputPair[];
+}
 
 export default class OutputDef{
     outputPairs: OutputPair[];
+}
+
+export function initOutputDef(): IOutputDef{
+    return {
+        outputPairs: []
+    }
 }
 
 export class OutputPair{
