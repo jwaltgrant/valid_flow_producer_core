@@ -15,7 +15,10 @@ export function initOutputNode(): IOutputNode {
     };
 }
 
-export function addOutputPair(node: IOutputNode, pair: OutputDef.IOutputPair): IOutputNode {
+export function addOutputPair(
+    node: IOutputNode,
+    pair: OutputDef.IOutputPair
+): IOutputNode {
     if(node.outputPairs.find((p) => p.key === pair.key)){
         throw new Error(`Key of name: ${pair.key} is taken`);
     }
