@@ -5,6 +5,10 @@ export interface IOutputNode extends IAbstractNode {
   outputPairs: OutputDef.IOutputPair[];
 }
 
+export function instanceOfOutputNode(node: IAbstractNode){
+  return 'outputPairs' in node;
+}
+
 /**
  * Initialize an empty IOputNode
  */

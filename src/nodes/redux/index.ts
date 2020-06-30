@@ -1,6 +1,8 @@
 import {NODE_ACTIONS} from './actions';
 import * as Node from '../AbstractNode';
 import * as Action from '../action/ActionNode';
+import outputNodeReducer, { outputMatches } from '../io/redux';
+import { IOutputNode } from '../io/OutputNode';
 
 const initialState: Node.IAbstractNode[] = []
 
@@ -40,6 +42,9 @@ export default function nodeStore(state: Node.IAbstractNode[] = initialState, ac
           action.returnKey
         );
       default:
+        if(outputMatches(action.type)){
+          return outputNodeReducer(state as IOutputNode[], action);
+        }
         return state;
     }
 }
