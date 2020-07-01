@@ -5,10 +5,12 @@ export function outputMatches(actionType: string): boolean{
     return !!(Object.values(OUTPUT_NODE_ACTIONS).find((val) => val === actionType));
 }
 
-export default function outputNodeReducer(state: Output.IOutputNode[], action: any){
+const initialState: Output.IOutputNode[] = [];
+
+export default function outputNodeReducer(state: Output.IOutputNode[] = initialState, action: any){
     let index;
     let node;
-    switch(action){
+    switch(action.type){
         case OUTPUT_NODE_ACTIONS.ADD_OUTPUT_PAIR:
             index = state.findIndex((node) => node.id === action.nodeID);
             node = Output.addOutputPair(state[index], action.outputPair);

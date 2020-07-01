@@ -12,9 +12,9 @@ export function instanceOfOutputNode(node: IAbstractNode){
 /**
  * Initialize an empty IOputNode
  */
-export function initOutputNode(): IOutputNode {
+export function initOutputNode(id?: string): IOutputNode {
     return {
-      ...initAbstractNode(),
+      ...initAbstractNode(id),
       outputPairs: [],
     };
 }

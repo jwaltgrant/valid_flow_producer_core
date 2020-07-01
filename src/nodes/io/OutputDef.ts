@@ -10,7 +10,7 @@ export function initOutputDef(): IOutputDef{
 
 export interface IOutputPair{
     key: string;
-    payloadElemet: boolean;
+    payloadElement: boolean;
     literalDef?: ILiteralOutputDef;
     payloadKey?: string;
 }

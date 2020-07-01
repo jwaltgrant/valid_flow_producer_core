@@ -102,8 +102,8 @@ export interface IAbstractNode{
     id: string;
 }
 
-export function initAbstractNode(): IAbstractNode {
-  return {id: ''};
+export function initAbstractNode(id? : string): IAbstractNode {
+  return {id: id || ''};
 }
 
 /**
