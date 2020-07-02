@@ -184,9 +184,9 @@ export function disconnectNodes(
   return state;
 }
 
-export function initChildNode(): IChildNode {
+export function initChildNode(id?: string): IChildNode {
   return {
-    ...initAbstractNode(),
+    ...initAbstractNode(id),
     parentNodeIDs: []
   };
 }

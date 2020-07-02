@@ -1,7 +1,7 @@
-import { IAbstractNode, initAbstractNode } from "../AbstractNode";
+import { IAbstractNode, initChildNode, IChildNode } from "../AbstractNode";
 import * as OutputDef from './OutputDef';
 
-export interface IOutputNode extends IAbstractNode {
+export interface IOutputNode extends IChildNode {
   outputPairs: OutputDef.IOutputPair[];
 }
 
@@ -14,7 +14,7 @@ export function instanceOfOutputNode(node: IAbstractNode){
  */
 export function initOutputNode(id?: string): IOutputNode {
     return {
-      ...initAbstractNode(id),
+      ...initChildNode(id),
       outputPairs: [],
     };
 }
