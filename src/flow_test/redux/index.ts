@@ -1,24 +1,54 @@
-import { ITestPayload, TestPayload, ITestField } from "..";
+import { ITestPayload, TestPayload, ITestField, ITestResult } from "..";
 import { FlowTestActions } from "./actions";
 
-const initialState: ITestPayload = null;
+export interface rState {
+    testPayload: ITestPayload;
+    testResults: ITestResult[];
+}
 
-export default function testPayloadReducer(state: ITestPayload = initialState, action: any): ITestPayload{
+const initialState: rState = {
+    testPayload: null,
+    testResults: []
+};
+
+export default function testPayloadReducer(state: rState = initialState, action: any): rState{
     let fields: ITestField[];
     switch(action.type){
         case FlowTestActions.INITIALIZE_FROM_PAYLOAD:
-            return TestPayload.initFromPayloadDef(action.payloadDef, action.name);
-        case FlowTestActions.ADD_TEST_FIELD:
-            fields = TestPayload.addTestField(state.fields, action.newField);
             return {
                 ...state,
-                fields
+                testPayload: TestPayload.initFromPayloadDef(action.payloadDef, action.name)
+            }
+        case FlowTestActions.ADD_TEST_FIELD:
+            fields = TestPayload.addTestField(state.testPayload.fields, action.newField);
+            return {
+                ...state,
+                testPayload: {
+                    ...state.testPayload,
+                    fields
+                }
             }
         case FlowTestActions.UPDATE_TEST_FIELD:
-            fields = TestPayload.updateTestField(state.fields, action.newField);
+            fields = TestPayload.updateTestField(state.testPayload.fields, action.newField);
             return {
                 ...state,
-                fields
+                testPayload: {
+                    ...state.testPayload,
+                    fields
+                }
+            }
+        case FlowTestActions.ADD_TEST_RESULT:
+            const index = state.testResults.findIndex((r) => r.nodeID === action.result.nodeID);
+            if(index === -1){
+                return {
+                    ...state,
+                    testResults: [...state.testResults, action.result]
+                }
+            }
+            state.testResults.splice(index, 1, action.result);
+            return {
+                ...state,
+                testResults: [...state.testResults]
             }
     }
     return state;
