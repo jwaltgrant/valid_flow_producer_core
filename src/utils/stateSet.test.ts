@@ -61,7 +61,7 @@ const findItem = (items: rState[], name: any): rState => {
     });
 }
 
-const reducer = StateSet.createStateSet<rState>(FlowTestReducer, findItem);
+const {reducer, addItem, removeItem, activateItem} = StateSet.createStateSet<rState>(FlowTestReducer, findItem);
 
 describe('State Set Tests', () => {
     let state: StateSet.IsetReducer<rState> = {
@@ -73,17 +73,17 @@ describe('State Set Tests', () => {
     });
     test('Add Item', () => {
         expect(state.items.length).toEqual(0);
-        state = reducer(state, StateSet.addItem(child1));
+        state = reducer(state, addItem(child1));
         expect(state.items.length).toEqual(1);
         expect(state.items[0]).toEqual(child1)
-        state = reducer(state, StateSet.addItem(child2));
+        state = reducer(state, addItem(child2));
         expect(state.items.length).toEqual(2);
         expect(state.items[1]).toEqual(child2);
         
     });
     test('Activate Item', () => {
         expect(state.activeItemKey).toEqual(null);
-        state = reducer(state, StateSet.activateItem(testPayload1.name));
+        state = reducer(state, activateItem(testPayload1.name));
         expect(state.activeItemKey).toEqual(testPayload1.name);
     });
     test('Find Active Item', () => {
@@ -112,7 +112,7 @@ describe('State Set Tests', () => {
     test('Remove Item', () => {
         expect(state.activeItemKey).not.toBeNull();
         expect(state.items.length).toEqual(2);
-        state = reducer(state, StateSet.removeItem(testPayload1.name));
+        state = reducer(state, removeItem(testPayload1.name));
         expect(state.activeItemKey).toBeNull();
         expect(state.items.length).toEqual(1);
     });
