@@ -25,7 +25,7 @@ const testPayload1: ITestPayload = {
   ],
 };
 
-const child1:{testPayload: any, testResults: any} = {
+const child1:rState = {
     testPayload:testPayload1,
     testResults: []
 }
@@ -50,7 +50,7 @@ const testPayload2: ITestPayload = {
     },
   ],
 };
-const child2: { testPayload: any; testResults: any } = {
+const child2: rState = {
   testPayload: testPayload2,
   testResults: [],
 };
