@@ -10,9 +10,8 @@ export enum BaseTypes {
   STRING = "string",
 }
 
-
 export interface IType {
-    typeName: string;
-    fields: IFieldDef[];
-    blocks: IBlockImplementation[];
+  typeName: string;
+  fields: IFieldDef[];
+  blocks: IBlockImplementation[];
 }
