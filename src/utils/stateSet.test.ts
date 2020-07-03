@@ -64,7 +64,7 @@ const findItem = (items: rState[], name: any): rState => {
 const {reducer, addItem, removeItem, activateItem} = StateSet.createStateSet<rState>(FlowTestReducer, findItem);
 
 describe('State Set Tests', () => {
-    let state: StateSet.IsetReducer<rState> = {
+    let state: StateSet.ISetReducer<rState> = {
         activeItemKey: null,
         items: []
     }

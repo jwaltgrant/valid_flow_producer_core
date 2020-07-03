@@ -5,7 +5,7 @@ export enum StateSetActions {
 }
 
 
-export interface IsetReducer<T> {
+export interface ISetReducer<T> {
   activeItemKey: string | number;
   items: T[];
 }
@@ -22,7 +22,7 @@ const keySingleton = (function() {
 })();
 
 export interface ICreateStateSetRet<T>{
-    reducer: (state: IsetReducer<T>, action: any) => IsetReducer<T>;
+    reducer: (state: ISetReducer<T>, action: any) => ISetReducer<T>;
     addItem: (item: T) => any;
     removeItem: (itemKey: any) => any;
     activateItem: (itemKey: any) => any;
@@ -60,11 +60,11 @@ export function createStateSet<T>(
         const t = action.type;
         return (!!Object.values(StateSetActions).find((i) => `${i}_${key}` === t));
     }
-    const initialState: IsetReducer<any> = {
+    const initialState: ISetReducer<any> = {
       activeItemKey: null,
       items: [],
     };
-    const setReducer = (state: IsetReducer<T>, action: any) => {
+    const setReducer = (state: ISetReducer<T>, action: any) => {
         let index;
         let item;
         switch (action.type) {
@@ -103,7 +103,7 @@ export function createStateSet<T>(
         }
         return state;
     }
-    const reducer = (state: IsetReducer<T> = initialState, action: any) => {
+    const reducer = (state: ISetReducer<T> = initialState, action: any) => {
         if(useSet(action)){
             return setReducer(state, action);
         } else{
