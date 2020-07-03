@@ -6,7 +6,7 @@ export enum StateSetActions {
 
 
 export interface ISetReducer<T> {
-  activeItemKey: string | number;
+  activeItemKey: any;
   items: T[];
 }
 
@@ -56,7 +56,7 @@ export function createStateSet<T>(
     }
 
 
-    const useSet = (action: any) => {
+    const shouldUseSet = (action: any) => {
         const t = action.type;
         return (!!Object.values(StateSetActions).find((i) => `${i}_${key}` === t));
     }
@@ -104,20 +104,20 @@ export function createStateSet<T>(
         return state;
     }
     const reducer = (state: ISetReducer<T> = initialState, action: any) => {
-        if(useSet(action)){
-            return setReducer(state, action);
-        } else{
-            const activeItem = findItem(state.items, state.activeItemKey);
-            if (!activeItem) {
-              return state;
-            }
-            const activeIndex = state.items.indexOf(activeItem);
-            const updated = singleReducer(state.items[activeIndex], action);
-            state.items.splice(activeIndex, 1, updated);
-            return {
-                ...state,
-                items: [...state.items]
-            }
+        if (shouldUseSet(action)) {
+          return setReducer(state, action);
+        } else {
+          const activeItem = findItem(state.items, state.activeItemKey);
+          if (!activeItem) {
+            return state;
+          }
+          const activeIndex = state.items.indexOf(activeItem);
+          const updated = singleReducer(state.items[activeIndex], action);
+          state.items.splice(activeIndex, 1, updated);
+          return {
+            ...state,
+            items: [...state.items],
+          };
         }
     }
     return {reducer, addItem, removeItem, activateItem};
