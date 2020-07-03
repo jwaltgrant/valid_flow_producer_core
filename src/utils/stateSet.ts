@@ -26,15 +26,15 @@ export function activateItem(itemKey: string | number){
 }
 
 
-export function createStateSet(
-  singleReducer: (state: any, action: any) => any,
-  findItem: (items: any[], key: any) => any
-): (state: IsetReducer, action: any) => any{
+export function createStateSet<T>(
+  singleReducer: (state: T, action: any) => T,
+  findItem: (items: T[], key: any) => T
+): (state: IsetReducer<T>, action: any) => any{
     const useSet = (action: any) => {
         const t = action.type;
         return (!!Object.values(StateSetActions).find((i) => i === t));
     }
-    const reducer = (state: IsetReducer = initialState, action: any) => {
+    const reducer = (state: IsetReducer<T> = initialState, action: any) => {
         if(useSet(action)){
             return setReducer(state, action, findItem);
         } else{
@@ -55,20 +55,20 @@ export function createStateSet(
 }
 
 
-export interface IsetReducer{
+export interface IsetReducer<T>{
     activeItemKey: string | number;
-    items: any[]
+    items: T[]
 }
 
-const initialState: IsetReducer = {
+const initialState: IsetReducer<any> = {
     activeItemKey: null,
     items: []
 }
 
-function setReducer(
-  state: IsetReducer = initialState,
+function setReducer<T>(
+  state: IsetReducer<T> = initialState,
   action: any,
-  findItem: (items: any[], key: any) => any
+  findItem: (items: T[], key: any) => T
 ) {
   let index;
   let item;

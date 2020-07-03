@@ -1,6 +1,6 @@
 import * as StateSet from './stateSet';
 
-import FlowTestReducer from '../flow_test/redux';
+import FlowTestReducer, { rState } from '../flow_test/redux';
 import * as FlowTestActions from '../flow_test/redux/actions';
 import { ITestPayload } from '../flow_test';
 
@@ -55,16 +55,16 @@ const child2: { testPayload: any; testResults: any } = {
   testResults: [],
 };
 
-const findItem = (items: any[], name: any) => {
+const findItem = (items: rState[], name: any): rState => {
     return items.find((i) => {
         return i.testPayload.name === name;
     });
 }
 
-const reducer = StateSet.createStateSet(FlowTestReducer, findItem);
+const reducer = StateSet.createStateSet<rState>(FlowTestReducer, findItem);
 
 describe('State Set Tests', () => {
-    let state: StateSet.IsetReducer = {
+    let state: StateSet.IsetReducer<rState> = {
         activeItemKey: null,
         items: []
     }
