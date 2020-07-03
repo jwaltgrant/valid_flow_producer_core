@@ -1,4 +1,4 @@
-import { IArgDef } from './ArgDef';
+import { IArgDef } from "./ArgDef";
 
 export default interface IBlockSet {
   blockSetKey: string;

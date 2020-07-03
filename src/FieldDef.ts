@@ -1,4 +1,4 @@
-export default interface IFieldDef{
-    name: string;
-    type: string;
+export default interface IFieldDef {
+  name: string;
+  type: string;
 }

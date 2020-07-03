@@ -60,14 +60,17 @@ export function hasItem(
  * Add Payload Item and return a spread of the updated payload def
  * @param item Item to add to the payload
  */
-export function addPayloadItem(payloadDefinition: IPayloadDefinition, item: IFieldDef): IPayloadDefinition{
-  if(hasItem(payloadDefinition, item.name)){
+export function addPayloadItem(
+  payloadDefinition: IPayloadDefinition,
+  item: IFieldDef
+): IPayloadDefinition {
+  if (hasItem(payloadDefinition, item.name)) {
     throw new Error(`Item with name: ${item.name} is already in use`);
   }
   const payloadItems = [...payloadDefinition.payloadItems, item];
   return {
     ...payloadDefinition,
-    payloadItems
+    payloadItems,
   };
 }
 
@@ -76,14 +79,17 @@ export function addPayloadItem(payloadDefinition: IPayloadDefinition, item: IFie
  * @param payloadDefinition IPayloadDefinition to add to
  * @param item Item to Add
  */
-export function addDynamicKey(payloadDefinition: IPayloadDefinition, item: IDynamicKey): IPayloadDefinition{
-  if(hasItem(payloadDefinition, item.name)){
+export function addDynamicKey(
+  payloadDefinition: IPayloadDefinition,
+  item: IDynamicKey
+): IPayloadDefinition {
+  if (hasItem(payloadDefinition, item.name)) {
     throw new Error(`Item with name: ${item.name} is already in use`);
   }
   const dynamicKeys = [...payloadDefinition.dynamicKeys, item];
   return {
     ...payloadDefinition,
-    dynamicKeys
+    dynamicKeys,
   };
 }
 
@@ -92,15 +98,22 @@ export function addDynamicKey(payloadDefinition: IPayloadDefinition, item: IDyna
  * @param payloadDefinition IPayloadDefinition to remove item from
  * @param name Name of the item to remove
  */
-export function removeItem(payloadDefinition: IPayloadDefinition, name: string): IPayloadDefinition{
+export function removeItem(
+  payloadDefinition: IPayloadDefinition,
+  name: string
+): IPayloadDefinition {
   let payloadItems = [...payloadDefinition.payloadItems];
   let dynamicKeys = [...payloadDefinition.dynamicKeys];
-  let index = payloadDefinition.payloadItems.indexOf(findPayloadItem(payloadDefinition, name));
-  if(index >= 0){
+  let index = payloadDefinition.payloadItems.indexOf(
+    findPayloadItem(payloadDefinition, name)
+  );
+  if (index >= 0) {
     payloadItems.splice(index, 1);
-  } else{
-    index = payloadDefinition.dynamicKeys.indexOf(findDynamicKey(payloadDefinition, name));
-    if(index >= 0){
+  } else {
+    index = payloadDefinition.dynamicKeys.indexOf(
+      findDynamicKey(payloadDefinition, name)
+    );
+    if (index >= 0) {
       dynamicKeys.splice(index, 1);
     }
   }
@@ -123,8 +136,8 @@ export function getAvailablePayloadItems(
 ): IFieldDef[] {
   let payloadItems: IFieldDef[] = [...payloadDefinition.payloadItems];
   const nodeAncestors = getAncenstorNodes(node, nodes);
-  for(const node of nodeAncestors){
-    if((node as IActionNode).returnKey){
+  for (const node of nodeAncestors) {
+    if ((node as IActionNode).returnKey) {
       payloadItems.push({ name: (node as IActionNode).returnKey, type: "any" });
     }
   }

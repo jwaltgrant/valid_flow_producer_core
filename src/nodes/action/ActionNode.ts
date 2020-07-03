@@ -1,8 +1,4 @@
-import {
-  IAbstractNode,
-  IChildNode,
-  initChildNode
-} from "../AbstractNode";
+import { IAbstractNode, IChildNode, initChildNode } from "../AbstractNode";
 import * as Block from "../blockInstance/BlockInstance";
 import { IBlockDef } from "../blockInstance/IBlockSet";
 
@@ -17,11 +13,14 @@ export function initActionNode(actionKey: string): IActionNode {
     ...initChildNode(),
     actionKey,
     block: Block.initBlockInstance(),
-    returnKey: ''
-  }
+    returnKey: "",
+  };
 }
 
-function findActionNode(state: IAbstractNode[], nodeID: string): IActionNode | null{
+function findActionNode(
+  state: IAbstractNode[],
+  nodeID: string
+): IActionNode | null {
   const node: IActionNode = state.find((n) => n.id === nodeID) as IActionNode;
   if (!node || !("block" in node)) {
     return null;
@@ -56,7 +55,7 @@ export function updateArg(
   argInstance: Block.IArgInstance
 ) {
   const node = findActionNode(state, nodeID);
-  if(!node){
+  if (!node) {
     return state;
   }
   const index = state.indexOf(node);
@@ -64,7 +63,7 @@ export function updateArg(
     ...node,
     block: Block.updateArg(node.block, argInstance),
   };
-  state.splice(index, 1, _node)
+  state.splice(index, 1, _node);
   return [...state];
 }
 
@@ -80,7 +79,7 @@ export function setReturnKey(
   const index = state.indexOf(node);
   const _node = {
     ...node,
-    returnKey
+    returnKey,
   };
   state.splice(index, 1, _node);
   return [...state];

@@ -1,41 +1,42 @@
 import { IActionNode, initActionNode } from "./ActionNode";
 import { INodeActions, IAbstractNode, IConnect } from "../AbstractNode";
 
-export interface IFunctionAction extends IActionNode{
-    targets: string[];
+export interface IFunctionAction extends IActionNode {
+  targets: string[];
 }
 
 export function initFunctionAction(): IFunctionAction {
   return {
     ...initActionNode("FUNC"),
-    targets: []
-  }
+    targets: [],
+  };
 }
 
-export enum FunctionActionKey{
-    INPUT = 'input',
-    OUTPUT = 'output'
+export enum FunctionActionKey {
+  INPUT = "input",
+  OUTPUT = "output",
 }
 
 export class FunctionActions implements INodeActions<IFunctionAction> {
   public instanceOf(node: IAbstractNode): boolean {
     return "targets" in node;
   }
-  public connectNode(connectionData: IConnect<IFunctionAction>): IFunctionAction {
+  public connectNode(
+    connectionData: IConnect<IFunctionAction>
+  ): IFunctionAction {
     const connections = this.getConnectionList(
       connectionData.fromNode,
       connectionData.connectionKey
     );
-    if (
-      connections &&
-      !connections.includes(connectionData.toNodeID)
-    ) {
+    if (connections && !connections.includes(connectionData.toNodeID)) {
       connections.push(connectionData.toNodeID);
     }
     return { ...connectionData.fromNode };
   }
 
-  public disconnectNode(connectionData: IConnect<IFunctionAction>): IFunctionAction {
+  public disconnectNode(
+    connectionData: IConnect<IFunctionAction>
+  ): IFunctionAction {
     const connections = this.getConnectionList(
       connectionData.fromNode,
       connectionData.connectionKey
@@ -54,8 +55,8 @@ export class FunctionActions implements INodeActions<IFunctionAction> {
     switch (connectionKey) {
       case FunctionActionKey.INPUT:
         return node.parentNodeIDs;
-        case FunctionActionKey.OUTPUT:
-            return node.targets;
+      case FunctionActionKey.OUTPUT:
+        return node.targets;
     }
   }
 }

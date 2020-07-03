@@ -1,7 +1,6 @@
 import FunctionActions from "./action/FunctionAction";
 import { IActionNode, initActionNode } from "./action/ActionNode";
 
-
 export interface IBooleanAction extends IActionNode {
   falseTargets: string[];
   trueTargets: string[];
@@ -65,28 +64,28 @@ export class BoolActions implements INodeActions<IBooleanAction> {
   }
 }
 
-export class NodeActionClassRegistry{
+export class NodeActionClassRegistry {
   private nodeActionClasses: INodeActions<IAbstractNode>[];
 
   constructor() {
-    this.nodeActionClasses = []
+    this.nodeActionClasses = [];
   }
 
-  public registerNodeActionClass(actionClass: INodeActions<IAbstractNode>){
+  public registerNodeActionClass(actionClass: INodeActions<IAbstractNode>) {
     this.nodeActionClasses.push(actionClass);
   }
 
-  public connect(connectData: IConnect<IAbstractNode>){
-    for(const actionClass of this.nodeActionClasses){
-      if(actionClass.instanceOf(connectData.fromNode)){
+  public connect(connectData: IConnect<IAbstractNode>) {
+    for (const actionClass of this.nodeActionClasses) {
+      if (actionClass.instanceOf(connectData.fromNode)) {
         return actionClass.connectNode(connectData);
       }
     }
     throw new Error(`No Action class registered for ${connectData.fromNode}`);
   }
-  public disconnect(connectData: IConnect<IAbstractNode>){
-    for(const actionClass of this.nodeActionClasses){
-      if(actionClass.instanceOf(connectData.fromNode)){
+  public disconnect(connectData: IConnect<IAbstractNode>) {
+    for (const actionClass of this.nodeActionClasses) {
+      if (actionClass.instanceOf(connectData.fromNode)) {
         return actionClass.disconnectNode(connectData);
       }
     }
@@ -98,12 +97,12 @@ export const defaultRegistry = new NodeActionClassRegistry();
 defaultRegistry.registerNodeActionClass(FunctionActions);
 defaultRegistry.registerNodeActionClass(new BoolActions());
 
-export interface IAbstractNode{
-    id: string;
+export interface IAbstractNode {
+  id: string;
 }
 
-export function initAbstractNode(id? : string): IAbstractNode {
-  return {id: id || ''};
+export function initAbstractNode(id?: string): IAbstractNode {
+  return { id: id || "" };
 }
 
 /**
@@ -111,12 +110,20 @@ export function initAbstractNode(id? : string): IAbstractNode {
  * @param forNode Node to get all Ancestor IDs for
  * @param allNodes All Available nodes
  */
-export function getAncenstorNodeIDs(forNode: IChildNode, allNodes: IAbstractNode[]){
+export function getAncenstorNodeIDs(
+  forNode: IChildNode,
+  allNodes: IAbstractNode[]
+) {
   return getAncenstorNodes(forNode, allNodes).map((n) => n.id);
 }
 
-export function getAncenstorNodes(forNode: IChildNode, allNodes: IAbstractNode[]): IAbstractNode[]{
-  let ancestors: IAbstractNode[] = allNodes.filter((node) => forNode.parentNodeIDs.includes(node.id));
+export function getAncenstorNodes(
+  forNode: IChildNode,
+  allNodes: IAbstractNode[]
+): IAbstractNode[] {
+  let ancestors: IAbstractNode[] = allNodes.filter((node) =>
+    forNode.parentNodeIDs.includes(node.id)
+  );
   for (const node of allNodes) {
     if (
       forNode.parentNodeIDs.indexOf(node.id) > -1 &&
@@ -128,18 +135,18 @@ export function getAncenstorNodes(forNode: IChildNode, allNodes: IAbstractNode[]
   return ancestors;
 }
 
-export function addNode(state: IAbstractNode[], node: IAbstractNode){
+export function addNode(state: IAbstractNode[], node: IAbstractNode) {
   const _node = state.find((n) => n.id === node.id);
-  if(_node){
+  if (_node) {
     throw new Error(`Node ID: ${node.id} is taken`);
   }
   state.push(node);
   return [...state];
 }
 
-export function removeNode(state: IAbstractNode[], nodeID: string){
+export function removeNode(state: IAbstractNode[], nodeID: string) {
   const node = state.find((n) => n.id === nodeID);
-  if(!node){
+  if (!node) {
     return state;
   }
   const index = state.indexOf(node);
@@ -151,23 +158,25 @@ function findAndCD(
   state: IAbstractNode[],
   connectData: IConnect<IAbstractNode>,
   connect: boolean
-): {state: IAbstractNode[], updated: boolean}{
-    const _node = state.find((n) => n.id === connectData.fromNode.id);
-    if (!_node) {
-      return {state, updated: false};
-    }
-    const index = state.indexOf(_node);
-    const connectedNode = connect ? defaultRegistry.connect(connectData): defaultRegistry.disconnect(connectData);
-    state.splice(index, 1, connectedNode);
-    return {state, updated: true};
+): { state: IAbstractNode[]; updated: boolean } {
+  const _node = state.find((n) => n.id === connectData.fromNode.id);
+  if (!_node) {
+    return { state, updated: false };
+  }
+  const index = state.indexOf(_node);
+  const connectedNode = connect
+    ? defaultRegistry.connect(connectData)
+    : defaultRegistry.disconnect(connectData);
+  state.splice(index, 1, connectedNode);
+  return { state, updated: true };
 }
 
 export function connectNodes(
   state: IAbstractNode[],
-  conenctData: IConnect<IAbstractNode>,
-): IAbstractNode[]{
+  conenctData: IConnect<IAbstractNode>
+): IAbstractNode[] {
   const _do = findAndCD(state, conenctData, true);
-  if(_do.updated){
+  if (_do.updated) {
     return [..._do.state];
   }
   return state;
@@ -187,7 +196,7 @@ export function disconnectNodes(
 export function initChildNode(id?: string): IChildNode {
   return {
     ...initAbstractNode(id),
-    parentNodeIDs: []
+    parentNodeIDs: [],
   };
 }
 
@@ -195,11 +204,11 @@ export interface IChildNode extends IAbstractNode {
   parentNodeIDs: string[];
 }
 
-export function instanceOfIChildNode(object: any): object is IChildNode{
-    return ('parentNodeIDs' in object);
+export function instanceOfIChildNode(object: any): object is IChildNode {
+  return "parentNodeIDs" in object;
 }
 
-export interface IConnect<T extends IAbstractNode>{
+export interface IConnect<T extends IAbstractNode> {
   fromNode: T;
   toNodeID: string;
   connectionKey: string;
