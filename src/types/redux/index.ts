@@ -11,6 +11,11 @@ export default function typesStore(state = initialState, action: any): IType {
   let blockIndex;
   let fieldIndex;
   switch(action.type){
+    case TYPE_ACTIONS.CHANGE_NAME:
+      return {
+        ...state,
+        typeName: action.name
+      }
     case TYPE_ACTIONS.ADD_BLOCK:
       state.blocks.push(action.block);
       return {...state};
@@ -22,7 +27,7 @@ export default function typesStore(state = initialState, action: any): IType {
       state.blocks.splice(blockIndex, 1);
       return {...state};
     case TYPE_ACTIONS.UPDATE_BLOCK:
-      blockIndex = state.blocks.findIndex((b) => b.name === action.blockName);
+      blockIndex = state.blocks.findIndex((b) => b.name === action.oldName);
       if(blockIndex === -1){
         state.blocks.push(action.block);
       } else {
