@@ -47,18 +47,18 @@ describe('Types Reducer Tests', () => {
     });
     test('Add Block', () => {
         let block: IBlockImplementation = {
-            name: 'some_func',
+            blockKey: 'some_func',
             inputNode: {targets: [], id: 'i1'},
             outputNodes: [],
             actions: []
         }
         expect(state.blocks.length).toEqual(0);
         state = reducer(state, Actions.addBlock(block));
-        expect(state.blocks.find(b => b.name === block.name)).toEqual(block);
+        expect(state.blocks.find(b => b.blockKey === block.blockKey)).toEqual(block);
     });
     test('Update Block', () => {
         let block: IBlockImplementation = {
-          name: "some_func",
+          blockKey: "some_func",
           inputNode: { targets: [], id: "i1" },
           outputNodes: [],
           actions: [{
@@ -66,16 +66,16 @@ describe('Types Reducer Tests', () => {
               parentNodeIDs: ['i1'],
           }],
         };
-        expect(state.blocks.find(b => b.name === block.name).actions.length).toEqual(0);
-        state = reducer(state, Actions.updateBlock(block.name, block));
+        expect(state.blocks.find(b => b.blockKey === block.blockKey).actions.length).toEqual(0);
+        state = reducer(state, Actions.updateBlock(block.blockKey, block));
         expect(
-          state.blocks.find((b) => b.name === block.name).actions[0]
+          state.blocks.find((b) => b.blockKey === block.blockKey).actions[0]
         ).toEqual(block.actions[0]);
     });
     test('Remove Block', () => {
-        expect(state.blocks.find(b => b.name === 'some_func')).not.toBeUndefined();
+        expect(state.blocks.find(b => b.blockKey === 'some_func')).not.toBeUndefined();
         state = reducer(state, Actions.removeBlock('some_func'));
-        expect(state.blocks.find(b => b.name === 'some_func')).toBeUndefined();
+        expect(state.blocks.find(b => b.blockKey === 'some_func')).toBeUndefined();
     })
 })
 
