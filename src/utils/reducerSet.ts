@@ -26,6 +26,7 @@ export interface ICreateStateSetRet<T>{
     addItem: (item: T) => any;
     removeItem: (itemKey: any) => any;
     activateItem: (itemKey: any) => any;
+    findItem: (items: T[], itemKey: any) => T;
 }
 
 export function createReducerSet<T>(
@@ -120,5 +121,5 @@ export function createReducerSet<T>(
           };
         }
     }
-    return {reducer, addItem, removeItem, activateItem};
+    return {reducer, addItem, removeItem, activateItem, findItem};
 }

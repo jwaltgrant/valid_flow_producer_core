@@ -7,7 +7,7 @@ const initialState: IType = {
   blocks: []
 };
 
-export default function typesStore(state = initialState, action: any): IType {
+export default function typeStore(state = initialState, action: any): IType {
   let blockIndex;
   let fieldIndex;
   switch(action.type){
