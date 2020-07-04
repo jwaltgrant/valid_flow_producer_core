@@ -3,8 +3,6 @@ import { IBlockImplementation } from "../BlockImplementation";
 import IFieldDef from "../../FieldDef";
 
 export enum TYPE_ACTIONS {
-  ADD_TYPE = "ta_add",
-  REMOVE_TYPE = "ta_rm",
   ADD_BLOCK = "ta_add_block",
   REMOVE_BLOCK = "ta_rm_block",
   UPDATE_BLOCK = "ta_update_block",
@@ -13,64 +11,56 @@ export enum TYPE_ACTIONS {
   UPDATE_FIELD = 'ta_update_field'
 }
 
-export function addType(newType: IType) {
-  return {
-    type: TYPE_ACTIONS.ADD_TYPE,
-    newType,
-  };
-}
-
-export function removeType(typeName: string) {
-  return {
-    type: TYPE_ACTIONS.REMOVE_TYPE,
-    typeName,
-  };
-}
-
-export function addBlock(typeName: string, block: IBlockImplementation){
+export function addBlock(typeName: string, block: IBlockImplementation, parentKey?: string){
   return {
     type: TYPE_ACTIONS.ADD_BLOCK,
     typeName,
-    block
+    block,
+    parentKey
   }
 }
 
-export function removeBlock(typeName: string, blockName: string){
+export function removeBlock(typeName: string, blockName: string, parentKey?: string){
   return {
     type: TYPE_ACTIONS.REMOVE_BLOCK,
     typeName,
-    blockName
+    blockName,
+    parentKey
   }
 }
 
-export function updateBlock(typeName: string, block: IBlockImplementation){
+export function updateBlock(typeName: string, block: IBlockImplementation, parentKey?: string){
   return {
     type: TYPE_ACTIONS.UPDATE_BLOCK,
     typeName,
-    block
+    block,
+    parentKey
   };
 }
 
-export function addField(typeName: string, newField: IFieldDef){
+export function addField(typeName: string, newField: IFieldDef, parentKey?: string){
   return {
     type: TYPE_ACTIONS.ADD_FIELD,
     typeName,
-    newField
+    newField,
+    parentKey
   };
 }
 
-export function removeField(typeName: string, fieldName: string){
+export function removeField(typeName: string, fieldName: string, parentKey?: string){
   return {
     type: TYPE_ACTIONS.REMOVE_FIELD,
     typeName,
-    fieldName
+    fieldName,
+    parentKey
   };
 }
 
-export function updateField(typeName: string, oldName: string, newField: IFieldDef){
+export function updateField(typeName: string, oldName: string, newField: IFieldDef, parentKey?: string){
   return {
     type: TYPE_ACTIONS.UPDATE_FIELD,
     typeName,
-    newField
+    newField,
+    parentKey
   }
 }
