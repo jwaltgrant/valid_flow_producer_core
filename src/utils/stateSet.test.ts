@@ -1,6 +1,6 @@
-import * as StateSet from './stateSet';
+import * as StateSet from './reducerSet';
 
-import FlowTestReducer, { rState } from '../flow_test/redux';
+import FlowTestReducer, { IFlowTestState } from '../flow_test/redux';
 import * as FlowTestActions from '../flow_test/redux/actions';
 import { ITestPayload } from '../flow_test';
 
@@ -25,7 +25,7 @@ const testPayload1: ITestPayload = {
   ],
 };
 
-const child1:rState = {
+const child1:IFlowTestState = {
     testPayload:testPayload1,
     testResults: []
 }
@@ -50,21 +50,21 @@ const testPayload2: ITestPayload = {
     },
   ],
 };
-const child2: rState = {
+const child2: IFlowTestState = {
   testPayload: testPayload2,
   testResults: [],
 };
 
-const findItem = (items: rState[], name: any): rState => {
+const findItem = (items: IFlowTestState[], name: any): IFlowTestState => {
     return items.find((i) => {
         return i.testPayload.name === name;
     });
 }
 
-const {reducer, addItem, removeItem, activateItem} = StateSet.createStateSet<rState>(FlowTestReducer, findItem);
+const {reducer, addItem, removeItem, activateItem} = StateSet.createReducerSet<IFlowTestState>(FlowTestReducer, findItem);
 
 describe('State Set Tests', () => {
-    let state: StateSet.ISetReducer<rState> = {
+    let state: StateSet.IReducerSetState<IFlowTestState> = {
         activeItemKey: null,
         items: []
     }

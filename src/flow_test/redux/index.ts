@@ -1,20 +1,20 @@
 import { ITestPayload, TestPayload, ITestField, ITestResult } from "..";
 import { FlowTestActions } from "./actions";
 
-export interface rState {
+export interface IFlowTestState {
   testPayload: ITestPayload;
   testResults: ITestResult[];
 }
 
-const initialState: rState = {
+const initialState: IFlowTestState = {
   testPayload: null,
   testResults: [],
 };
 
 export default function testPayloadReducer(
-  state: rState = initialState,
+  state: IFlowTestState = initialState,
   action: any
-): rState {
+): IFlowTestState {
   let fields: ITestField[];
   switch (action.type) {
     case FlowTestActions.INITIALIZE_FROM_PAYLOAD:

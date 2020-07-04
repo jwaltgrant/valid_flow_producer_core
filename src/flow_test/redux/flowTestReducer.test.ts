@@ -1,7 +1,7 @@
 import { IPayloadDefinition } from "../../payload/PayloadDefinition";
 import * as Actions from "./actions";
 import { ITestPayload, ITestField, ITestResult } from "..";
-import reducer, { rState } from ".";
+import reducer, { IFlowTestState } from ".";
 
 const payloadDef: IPayloadDefinition = {
   payloadItems: [
@@ -22,7 +22,7 @@ const payloadDef: IPayloadDefinition = {
 };
 
 describe("Flow Test Reducer Tests", () => {
-  let state: rState = undefined;
+  let state: IFlowTestState = undefined;
   test("Initial State", () => {
     expect(reducer(undefined, {})).toEqual({
       testPayload: null,
