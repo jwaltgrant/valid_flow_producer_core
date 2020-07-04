@@ -5,7 +5,7 @@ import flowTestStore, {IFlowTestState} from '../flow_test/redux';
 import {createReducerSet} from '../utils/reducerSet';
 
 
-const findItem = (items: IFlowTestState[], name: string) => {
+export const findItem = (items: IFlowTestState[], name: string) => {
   return items.find((i) => i.testPayload.name === name);
 };
 
