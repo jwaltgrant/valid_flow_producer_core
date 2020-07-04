@@ -1,6 +1,6 @@
 {
-  "name": "@river_boyne/valid_flow_producer_core",
-  "version": "0.2.3",
+  "name": "@boyne/vf_core",
+  "version": "0.1.0",
   "main": "index.ts",
   "scripts": {
     "test": "jest",
