@@ -109,6 +109,25 @@ describe('State Set Tests', () => {
           updated.testPayload.fields.find((i: any) => i.name === field.name)
         ).toEqual(field);
     });
+    test('Brother Actions does not affect', () => {
+      const anotherNewField = {
+        name: "ANOTHER ONE",
+        type: "any",
+        testVal: 6
+      };
+      let updated = findItem(state.items, state.activeItemKey);
+      expect(updated.testPayload.fields.length).toEqual(
+        testPayload1.fields.length + 1
+      );
+      state = reducer(state, FlowTestActions.addTestField(anotherNewField, 'Other'));
+      updated = findItem(state.items, state.activeItemKey);
+      expect(updated.testPayload.fields.length).toEqual(
+        testPayload1.fields.length + 1
+      );
+      expect(
+        updated.testPayload.fields.find((i: any) => i.name === anotherNewField.name)
+      ).toBeUndefined();
+    });
     test('Remove Item', () => {
         expect(state.activeItemKey).not.toBeNull();
         expect(state.items.length).toEqual(2);

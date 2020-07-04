@@ -107,11 +107,11 @@ export function createReducerSet<T>(
         if (shouldUseSet(action)) {
           return setReducer(state, action);
         } else {
-          const activeItem = findItem(state.items, state.activeItemKey);
-          if (!activeItem) {
+          const item = findItem(state.items, action.parentKey || state.activeItemKey);
+          if (!item) {
             return state;
           }
-          const activeIndex = state.items.indexOf(activeItem);
+          const activeIndex = state.items.indexOf(item);
           const updated = singleReducer(state.items[activeIndex], action);
           state.items.splice(activeIndex, 1, updated);
           return {
