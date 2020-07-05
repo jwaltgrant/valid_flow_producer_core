@@ -1,5 +1,5 @@
-export interface IArgDef {
-  name: string;
-  type?: string;
+import IFieldDef from "../../FieldDef";
+
+export interface IArgDef extends IFieldDef {
   default?: any;
 }
