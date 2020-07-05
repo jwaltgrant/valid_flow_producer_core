@@ -1,4 +1,3 @@
-import { IType } from "..";
 import { IBlockImplementation } from "../BlockImplementation";
 import IFieldDef from "../../FieldDef";
 
