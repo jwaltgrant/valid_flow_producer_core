@@ -99,10 +99,14 @@ defaultRegistry.registerNodeActionClass(new BoolActions());
 
 export interface IAbstractNode {
   id: string;
+  type: string;
 }
 
-export function initAbstractNode(id?: string): IAbstractNode {
-  return { id: id || "" };
+export function initAbstractNode(type: string, id?: string, ): IAbstractNode {
+  return {
+    id: id || "" ,
+    type
+  };
 }
 
 /**
@@ -193,9 +197,9 @@ export function disconnectNodes(
   return state;
 }
 
-export function initChildNode(id?: string): IChildNode {
+export function initChildNode(type: string, id?: string): IChildNode {
   return {
-    ...initAbstractNode(id),
+    ...initAbstractNode(type, id),
     parentNodeIDs: [],
   };
 }

@@ -6,7 +6,7 @@ export interface IInputNode extends IAbstractNode {
 
 export function initInputNode(id?: string): IInputNode{
   return {
-    ...initAbstractNode(id),
+    ...initAbstractNode("INPUT", id),
     targets: []
   }
 }

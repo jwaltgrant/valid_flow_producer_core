@@ -14,7 +14,7 @@ export function instanceOfOutputNode(node: IAbstractNode) {
  */
 export function initOutputNode(id?: string): IOutputNode {
   return {
-    ...initChildNode(id),
+    ...initChildNode("OUTPUT", id),
     outputPairs: [],
   };
 }
