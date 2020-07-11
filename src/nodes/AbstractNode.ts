@@ -1,14 +1,18 @@
 import FunctionActions from "./action/FunctionAction";
 import { IActionNode, initActionNode } from "./action/ActionNode";
+import { InputNodeActions } from "./io/InputNode";
+import { OutputNodeActions } from "./io/OutputNode";
 
 export interface IBooleanAction extends IActionNode {
   falseTargets: string[];
   trueTargets: string[];
 }
 
+export const BOOL_TYPE = 'BOOLEAN';
+
 export function initBooleanAction(): IBooleanAction {
   return {
-    ...initActionNode("BOOLEAN"),
+    ...initActionNode(BOOL_TYPE),
     falseTargets: [],
     trueTargets: [],
   };
@@ -22,7 +26,7 @@ export enum BooleanConnectionKey {
 
 export class BoolActions implements INodeActions<IBooleanAction> {
   public instanceOf(node: IAbstractNode): boolean {
-    return "falseTargets" in node && "trueTargets" in node;
+    return node.type === BOOL_TYPE;
   }
   public connectNode(connectionData: IConnect<IBooleanAction>): IBooleanAction {
     const connections = this.getConnectionList(
@@ -76,6 +80,8 @@ export class NodeActionClassRegistry {
   }
 
   public connect(connectData: IConnect<IAbstractNode>) {
+    console.log(connectData);
+    debugger;
     for (const actionClass of this.nodeActionClasses) {
       if (actionClass.instanceOf(connectData.fromNode)) {
         return actionClass.connectNode(connectData);
@@ -96,6 +102,8 @@ export class NodeActionClassRegistry {
 export const defaultRegistry = new NodeActionClassRegistry();
 defaultRegistry.registerNodeActionClass(FunctionActions);
 defaultRegistry.registerNodeActionClass(new BoolActions());
+defaultRegistry.registerNodeActionClass(new InputNodeActions());
+defaultRegistry.registerNodeActionClass(new OutputNodeActions());
 
 export interface IAbstractNode {
   id: string;
