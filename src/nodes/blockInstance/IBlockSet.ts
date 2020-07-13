@@ -1,8 +1,9 @@
 import { IArgDef } from "./ArgDef";
 
 export default interface IBlockSet {
-  blockSetKey: string;
-  blocks: IBlockDef[];
+  key: string;
+  displayName?: string;
+  opperations: IBlockDef[];
 }
 
 export interface IBlockDef {

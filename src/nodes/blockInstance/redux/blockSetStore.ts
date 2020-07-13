@@ -9,7 +9,7 @@ export default function blockSetStore(state = initialState, action: any) {
       return [...state, action.blockSet];
     case Actions.BLOCK_SET_ACTIONS.REMOVE_BLOCK_SET:
       const blockSet = state.find(
-        (bs) => bs.blockSetKey === action.blockSetKey
+        (bs) => bs.key === action.blockSetKey
       );
       if (!blockSet) {
         return state;
