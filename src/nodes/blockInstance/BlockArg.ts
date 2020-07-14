@@ -1,4 +1,4 @@
-export interface IArgDef {
+export interface IBlockArg {
   name: string;
   type?: string;
   default?: any;

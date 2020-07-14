@@ -1,4 +1,4 @@
-import { IArgDef } from "./ArgDef";
+import { IBlockArg } from "./BlockArg";
 import { IBlockDef } from "./IBlockSet";
 
 export interface IArgInstance {
@@ -7,7 +7,7 @@ export interface IArgInstance {
   payloadElement: boolean;
 }
 
-function mapFromArgDef(argDef: IArgDef): IArgInstance {
+function mapFromArgDef(argDef: IBlockArg): IArgInstance {
   return {
     name: argDef.name,
     value: argDef.default,

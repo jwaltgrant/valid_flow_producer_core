@@ -1,4 +1,4 @@
-import { IArgDef } from "./ArgDef";
+import { IBlockArg } from "./BlockArg";
 
 export default interface IBlockSet {
   blockSetKey: string;
@@ -8,7 +8,7 @@ export default interface IBlockSet {
 export interface IBlockDef {
   blockKey: string;
   uiString?: string;
-  args?: IArgDef[];
+  args?: IBlockArg[];
   listArgs?: boolean;
   listArgType?: string;
   returnType?: string;
