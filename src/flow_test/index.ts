@@ -1,5 +1,6 @@
 import IFieldDef from "../FieldDef";
 import { IPayloadDefinition } from "../payload/PayloadDefinition";
+export * as TestPayloadActions from "./redux/actions";
 
 export interface ITestField extends IFieldDef {
   testVal: any;
