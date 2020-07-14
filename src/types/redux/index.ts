@@ -20,14 +20,14 @@ export default function typeStore(state = initialState, action: any): IType {
       state.blocks.push(action.block);
       return {...state};
     case TYPE_ACTIONS.REMOVE_BLOCK:
-      blockIndex = state.blocks.findIndex((b) => b.blockKey === action.blockName);
+      blockIndex = state.blocks.findIndex((b) => b.key === action.blockName);
       if(blockIndex === -1){
         return state;
       }
       state.blocks.splice(blockIndex, 1);
       return {...state};
     case TYPE_ACTIONS.UPDATE_BLOCK:
-      blockIndex = state.blocks.findIndex((b) => b.blockKey === action.oldName);
+      blockIndex = state.blocks.findIndex((b) => b.key === action.oldName);
       if(blockIndex === -1){
         state.blocks.push(action.block);
       } else {

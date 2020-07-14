@@ -80,8 +80,6 @@ export class NodeActionClassRegistry {
   }
 
   public connect(connectData: IConnect<IAbstractNode>) {
-    console.log(connectData);
-    debugger;
     for (const actionClass of this.nodeActionClasses) {
       if (actionClass.instanceOf(connectData.fromNode)) {
         return actionClass.connectNode(connectData);

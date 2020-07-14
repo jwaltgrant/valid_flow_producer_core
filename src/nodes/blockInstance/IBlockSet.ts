@@ -7,7 +7,7 @@ export default interface IBlockSet {
 }
 
 export interface IBlockDef {
-  blockKey: string;
+  key: string;
   uiString?: string;
   args?: IArgDef[];
   listArgs?: boolean;
