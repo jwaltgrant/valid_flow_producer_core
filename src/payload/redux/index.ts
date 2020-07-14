@@ -8,7 +8,6 @@ export interface IPayloadState extends Payload.IPayloadDefinition {
 
 const initialState: IPayloadState = {
   payloadItems: [],
-  dynamicKeys: [],
   invalidKey: "",
 };
 
@@ -29,15 +28,6 @@ export default function payloadState(
           invalidKey: action.item.name,
         };
       }
-    case PAYLOAD_ACTIONS.ADD_DYANMIC_KEY:
-      try {
-        return { ...state, ...Payload.addDynamicKey(state, action.dynamicKey) };
-      } catch {
-        return {
-          ...state,
-          invalidKey: action.dynamicKey.name,
-        };
-      }
     case PAYLOAD_ACTIONS.REPLACE_ITEM:
       const item = state.payloadItems.find((i) => i.name === action.oldName);
       if (!item) {
@@ -53,7 +43,6 @@ export default function payloadState(
         payloadItems: [...state.payloadItems],
       };
     case PAYLOAD_ACTIONS.REMOVE_ITEM:
-    case PAYLOAD_ACTIONS.REMOVE_DYNAMIC_KEY:
       return { ...state, ...Payload.removeItem(state, action.name) };
     case PAYLOAD_ACTIONS.CHANGE_KEY:
       break;
