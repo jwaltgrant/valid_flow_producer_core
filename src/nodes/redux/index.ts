@@ -1,7 +1,6 @@
 import { NODE_ACTIONS } from "./actions";
-import { NodeHelpers } from "./helpers";
+import { NodeHelpers, ActionNodeHelpers } from "./helpers";
 import { IConnect, IAbstractNode } from "../AbstractNode";
-import * as Action from "../action/ActionNode";
 import outputNodeReducer, { outputMatches } from "../io/redux";
 import { IOutputNode } from "../io/OutputNode";
 
@@ -24,16 +23,24 @@ export default function nodeStore(
         action as IConnect<IAbstractNode>
       );
     case NODE_ACTIONS.SET_BLOCK:
-      return Action.updateBlock(
+      return ActionNodeHelpers.updateBlock(
         state,
         action.nodeID,
         action.blockSetKey,
         action.blockDef
       );
     case NODE_ACTIONS.SET_ARG:
-      return Action.updateArg(state, action.nodeID, action.argInstance);
+      return ActionNodeHelpers.updateArg(
+        state,
+        action.nodeID,
+        action.argInstance
+      );
     case NODE_ACTIONS.SET_RETURN_KEY:
-      return Action.setReturnKey(state, action.nodeID, action.returnKey);
+      return ActionNodeHelpers.setReturnKey(
+        state,
+        action.nodeID,
+        action.returnKey
+      );
     default:
       if (outputMatches(action.type)) {
         return outputNodeReducer(state as IOutputNode[], action);

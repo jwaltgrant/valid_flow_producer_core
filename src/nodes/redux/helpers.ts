@@ -1,5 +1,11 @@
-import { IAbstractNode, IConnect } from "..";
+import { IAbstractNode, IConnect, IActionNode } from "..";
 import NodeActionRegistry from "../NodeActionsRegistry";
+import { IBlockDef } from "../blockInstance/IBlockSet";
+import {
+  updateArg,
+  IArgInstance,
+  fromBlockDef,
+} from "../blockInstance/BlockInstance";
 
 /**
  * Collection of Static Functions used by the NodeStore Reducer
@@ -86,5 +92,75 @@ export class NodeHelpers {
       return [..._do.state];
     }
     return state;
+  }
+}
+
+export class ActionNodeHelpers {
+  private static findActionNode(
+    state: IAbstractNode[],
+    nodeID: string
+  ): IActionNode | null {
+    const node: IActionNode = state.find((n) => n.id === nodeID) as IActionNode;
+    if (!node || !("block" in node)) {
+      return null;
+    }
+    return node;
+  }
+
+  static updateBlock(
+    state: IAbstractNode[],
+    nodeID: string,
+    blockSetKey: string,
+    blockDef: IBlockDef
+  ) {
+    const node: IActionNode = state.find((n) => n.id === nodeID) as IActionNode;
+    if (!node || !("block" in node)) {
+      return state;
+    }
+    const index = state.indexOf(node);
+    const block = fromBlockDef({
+      blockSetKey,
+      blockDef,
+      block: node.block,
+    });
+    const _node = { ...node, block };
+    state.splice(index, 1, _node);
+    return [...state];
+  }
+
+  static updateArg(
+    state: IAbstractNode[],
+    nodeID: string,
+    argInstance: IArgInstance
+  ) {
+    const node = ActionNodeHelpers.findActionNode(state, nodeID);
+    if (!node) {
+      return state;
+    }
+    const index = state.indexOf(node);
+    const _node = {
+      ...node,
+      block: updateArg(node.block, argInstance),
+    };
+    state.splice(index, 1, _node);
+    return [...state];
+  }
+
+  static setReturnKey(
+    state: IAbstractNode[],
+    nodeID: string,
+    returnKey: string | null
+  ) {
+    const node = ActionNodeHelpers.findActionNode(state, nodeID);
+    if (!node) {
+      return state;
+    }
+    const index = state.indexOf(node);
+    const _node = {
+      ...node,
+      returnKey,
+    };
+    state.splice(index, 1, _node);
+    return [...state];
   }
 }
