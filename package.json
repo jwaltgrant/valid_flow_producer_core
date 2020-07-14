@@ -1,10 +1,10 @@
 {
   "name": "@boyne/fc_core",
   "version": "0.1.7",
-  "main": "index.ts",
+  "main": "dist/index.js",
   "scripts": {
     "test": "jest",
-    "build": "webpack"
+    "build": "tsc"
   },
   "repository": {
     "type": "git",

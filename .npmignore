@@ -10,3 +10,4 @@ jest.config.js
 valid_flow_spec/
 package.json
 tsconfig.json
+src/
