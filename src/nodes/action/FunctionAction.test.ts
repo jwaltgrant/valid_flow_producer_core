@@ -1,6 +1,6 @@
 import * as FuncAction from "./FunctionAction";
 
-const actions = new FuncAction.FunctionActions();
+const actions = FuncAction.default;
 export const funcAction: FuncAction.IFunctionAction = {
   targets: [],
   parentNodeIDs: [],

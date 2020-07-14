@@ -17,7 +17,7 @@ export enum FunctionActionKey {
   OUTPUT = "output",
 }
 
-export class FunctionActions implements INodeActions<IFunctionAction> {
+class FunctionActions implements INodeActions<IFunctionAction> {
   public instanceOf(node: IAbstractNode): boolean {
     return "targets" in node;
   }

@@ -3,11 +3,11 @@ import * as Actions from "./actions";
 import { boolAction } from "../action/BoolActions.test";
 import { funcAction as _funcAction } from "../action/FunctionAction.test";
 import { IAbstractNode } from "../AbstractNode";
-import { BooleanConnectionKey, IBooleanAction } from "../AbstractNode";
 import { FunctionActionKey } from "../action/FunctionAction";
 import { IBlockDef } from "../blockInstance/IBlockSet";
 import { IArgInstance } from "../../ArgInstance";
 import { IActionNode } from "../action/ActionNode";
+import { BooleanConnectionKey, IBooleanAction } from "../action/BooleanAction";
 
 const funcAction = { ..._funcAction, id: "function_actiosn" };
 

@@ -1,6 +1,6 @@
-import * as Bool from "../AbstractNode";
+import * as Bool from "./BooleanAction";
 
-const actions = new Bool.BoolActions();
+const actions = Bool.default;
 export const boolAction: Bool.IBooleanAction = {
   falseTargets: [],
   trueTargets: [],

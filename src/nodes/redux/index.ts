@@ -1,29 +1,27 @@
 import { NODE_ACTIONS } from "./actions";
-import * as Node from "../AbstractNode";
+import { NodeHelpers } from "./helpers";
+import { IConnect, IAbstractNode } from "../AbstractNode";
 import * as Action from "../action/ActionNode";
 import outputNodeReducer, { outputMatches } from "../io/redux";
 import { IOutputNode } from "../io/OutputNode";
 
-const initialState: Node.IAbstractNode[] = [];
+const initialState: IAbstractNode[] = [];
 
 export default function nodeStore(
-  state: Node.IAbstractNode[] = initialState,
+  state: IAbstractNode[] = initialState,
   action: any
-): Node.IAbstractNode[] {
+): IAbstractNode[] {
   switch (action.type) {
     case NODE_ACTIONS.ADD_NODE:
-      return Node.addNode(state, action.node);
+      return NodeHelpers.addNode(state, action.node);
     case NODE_ACTIONS.REMOVE_NODE:
-      return Node.removeNode(state, action.nodeID);
+      return NodeHelpers.removeNode(state, action.nodeID);
     case NODE_ACTIONS.CONNECT:
-      return Node.connectNodes(
-        state,
-        action as Node.IConnect<Node.IAbstractNode>
-      );
+      return NodeHelpers.connectNodes(state, action as IConnect<IAbstractNode>);
     case NODE_ACTIONS.DISCONNECT:
-      return Node.disconnectNodes(
+      return NodeHelpers.disconnectNodes(
         state,
-        action as Node.IConnect<Node.IAbstractNode>
+        action as IConnect<IAbstractNode>
       );
     case NODE_ACTIONS.SET_BLOCK:
       return Action.updateBlock(
