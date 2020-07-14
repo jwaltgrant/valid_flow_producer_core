@@ -1,0 +1,12 @@
+**/.*
+*.iml
+coverage/
+examples/
+node_modules/
+typings/
+test/
+webpack.*.js
+jest.config.js
+valid_flow_spec/
+package.json
+tsconfig.json

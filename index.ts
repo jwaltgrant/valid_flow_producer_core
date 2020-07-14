@@ -1,1 +1,9 @@
-module.exports = require("./src");
+export * from "./src/ArgDef";
+export * from "./src/ArgInstance";
+export * from "./src/BlockDef";
+export * from "./src/BlockInstance";
+export * from "./src/BlockSet";
+export * from "./src/Errors";
+export * from "./src/FieldDef";
+export * from "./src/nodes";
+export * from "./src/payload";
