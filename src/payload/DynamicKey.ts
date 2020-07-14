@@ -1,5 +1,5 @@
-import IFieldDef from '../FieldDef';
+import IFieldDef from "../FieldDef";
 
-export default interface IDynamicKey extends IFieldDef{
-    nodeID: string;
+export default interface IDynamicKey extends IFieldDef {
+  nodeID: string;
 }

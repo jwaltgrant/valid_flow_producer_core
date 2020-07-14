@@ -1,52 +1,86 @@
-import AbstractNode, {
-  IAbstractNode,
-  IChildNode,
-  instanceOfIChildNode,
-} from "../AbstractNode";
-import { IBlockInstance } from "../../BlockInstance";
+import { IAbstractNode, IChildNode, initChildNode } from "../AbstractNode";
+import * as Block from "../blockInstance/BlockInstance";
+import { IBlockDef } from "../blockInstance/IBlockSet";
 
-export interface IActionNode extends IAbstractNode, IChildNode {
-  readonly actionKey: string;
-  block: IBlockInstance;
+export interface IActionNode extends IChildNode {
+  readonly actionKey?: string;
+  block?: Block.IBlockInstance;
   returnKey?: string;
 }
 
-export default abstract class ActionNode extends AbstractNode implements IActionNode{
-    abstract readonly actionKey: string;
-    block: IBlockInstance;
-    returnKey?: string;
-    parentNodeIDs: string[];
+export function initActionNode(actionKey: string): IActionNode {
+  return {
+    ...initChildNode(),
+    actionKey,
+    block: Block.initBlockInstance(),
+    returnKey: "",
+  };
+}
 
+function findActionNode(
+  state: IAbstractNode[],
+  nodeID: string
+): IActionNode | null {
+  const node: IActionNode = state.find((n) => n.id === nodeID) as IActionNode;
+  if (!node || !("block" in node)) {
+    return null;
+  }
+  return node;
+}
 
-    constructor(id: string, parentNodeIDs: string[] = [], block?: IBlockInstance, returnKey?: string){
-        super(id);
-        this.block = block;
-        this.returnKey = returnKey;
-        this.parentNodeIDs = parentNodeIDs;
-    }
+export function updateBlock(
+  state: IAbstractNode[],
+  nodeID: string,
+  blockSetKey: string,
+  blockDef: IBlockDef
+) {
+  const node: IActionNode = state.find((n) => n.id === nodeID) as IActionNode;
+  if (!node || !("block" in node)) {
+    return state;
+  }
+  const index = state.indexOf(node);
+  const block = Block.fromBlockDef({
+    blockSetKey,
+    blockDef,
+    block: node.block,
+  });
+  const _node = { ...node, block };
+  state.splice(index, 1, _node);
+  return [...state];
+}
 
-    /**
-     * Search through a list of nodes for all nodes which are up stream(ancensotrs) of this node
-     * @param nodes Nodes to search through to find ancestors in
-     */
-    getAncenstorNodeIDs(nodes: AbstractNode[]): string[]{
-      let ancestors: string[] = [];
-      ancestors.push(...this.parentNodeIDs);
-      for(const node of nodes){
-        if (this.parentNodeIDs.indexOf(node.id) > -1 && instanceOfIChildNode(node)) {
-          ancestors.push(...node.getAncenstorNodeIDs(nodes));
-        }
-      }
-      return ancestors;
-    }
+export function updateArg(
+  state: IAbstractNode[],
+  nodeID: string,
+  argInstance: Block.IArgInstance
+) {
+  const node = findActionNode(state, nodeID);
+  if (!node) {
+    return state;
+  }
+  const index = state.indexOf(node);
+  const _node = {
+    ...node,
+    block: Block.updateArg(node.block, argInstance),
+  };
+  state.splice(index, 1, _node);
+  return [...state];
+}
 
-    serialize(): IActionNode{
-      return {
-        ...super.serialize(),
-        block: this.block,
-        returnKey: this.returnKey,
-        parentNodeIDs: this.parentNodeIDs,
-        actionKey: this.actionKey
-      }
-    }
+export function setReturnKey(
+  state: IAbstractNode[],
+  nodeID: string,
+  returnKey: string | null
+) {
+  const node = findActionNode(state, nodeID);
+  if (!node) {
+    return state;
+  }
+  const index = state.indexOf(node);
+  const _node = {
+    ...node,
+    returnKey,
+  };
+  state.splice(index, 1, _node);
+  return [...state];
 }

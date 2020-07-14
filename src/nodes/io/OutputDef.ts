@@ -1,17 +1,21 @@
-export interface IOutputDef {}
-
-export default class OutputDef{
-    outputPairs: OutputPair[];
+export interface IOutputDef {
+  outputPairs: IOutputPair[];
 }
 
-export class OutputPair{
-    key: string;
-    payloadElemet: boolean;
-    literalDef?: LiteralOutputDef;
-    payloadKey?: string;
+export function initOutputDef(): IOutputDef {
+  return {
+    outputPairs: [],
+  };
 }
 
-export class LiteralOutputDef{
-    type: string;
-    value: any;
+export interface IOutputPair {
+  key: string;
+  payloadElement: boolean;
+  literalDef?: ILiteralOutputDef;
+  payloadKey?: string;
+}
+
+export interface ILiteralOutputDef {
+  type: string;
+  value: any;
 }
