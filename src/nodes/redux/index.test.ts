@@ -5,9 +5,9 @@ import { funcAction as _funcAction } from "../action/FunctionAction.test";
 import { IAbstractNode } from "../AbstractNode";
 import { FunctionActionKey } from "../action/FunctionAction";
 import { IBlockDef } from "../blockInstance/IBlockSet";
-import { IArgInstance } from "../../ArgInstance";
 import { IActionNode } from "../action/ActionNode";
 import { BooleanConnectionKey, IBooleanAction } from "../action/BooleanAction";
+import { IArgInstance } from "../blockInstance/BlockInstance";
 
 const funcAction = { ..._funcAction, id: "function_actiosn" };
 

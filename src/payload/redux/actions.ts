@@ -1,5 +1,4 @@
 import IFieldDef from "../../FieldDef";
-import IDynamicKey from "../DynamicKey";
 
 export enum PAYLOAD_ACTIONS {
   ADD_ITEM = "add_item",
@@ -31,20 +30,6 @@ export function replaceItem(oldName: string, newItem: IFieldDef) {
     type: PAYLOAD_ACTIONS.REPLACE_ITEM,
     oldName,
     newItem,
-  };
-}
-
-export function addDynamicKey(dynamicKey: IDynamicKey) {
-  return {
-    type: PAYLOAD_ACTIONS.ADD_DYANMIC_KEY,
-    dynamicKey,
-  };
-}
-
-export function removeDynamicKey(name: string) {
-  return {
-    type: PAYLOAD_ACTIONS.REMOVE_DYNAMIC_KEY,
-    name,
   };
 }
 

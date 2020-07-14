@@ -18,7 +18,6 @@ const payloadDef: IPayloadDefinition = {
       type: "any",
     },
   ],
-  dynamicKeys: [],
 };
 
 describe("Flow Test Reducer Tests", () => {
