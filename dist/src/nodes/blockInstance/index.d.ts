@@ -1,5 +1,6 @@
-export * as BlockActions from "./redux/actions";
 export * from "./BlockInstance";
 export * from "./BlockArg";
 export * from "./IBlockSet";
-export * as BlockStore from "./redux";
+import * as BlockStore from "./redux";
+import * as BlockActions from "./redux/actions";
+export { BlockStore, BlockActions };
