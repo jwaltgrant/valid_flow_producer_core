@@ -26,7 +26,9 @@
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11"
   },
-  "dependencies": {},
+  "dependencies": {
+    "redux": "^4.0.5"
+  },
   "description": "Start",
   "bugs": {
     "url": "https://github.com/jwaltgrant/valid_flow_producer_core/issues"

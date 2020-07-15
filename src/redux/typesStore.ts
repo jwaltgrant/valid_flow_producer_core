@@ -3,7 +3,7 @@ import typeStore from "../types/redux";
 import { IType } from "../types";
 
 const findType = (items: IType[], key: string) => {
-    return items.find(item => item.typeName === key);
-}
+  return items.find((item) => item.typeName === key);
+};
 
-export default createReducerSet(typeStore, findType);
+export const typesStore = createReducerSet(typeStore, findType);
