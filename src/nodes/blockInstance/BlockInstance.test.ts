@@ -4,7 +4,7 @@ import { IBlockDef } from "./IBlockSet";
 describe("Test Block Instance", () => {
   const blockSetKey = "testSet";
   const blockDef1: IBlockDef = {
-    blockKey: "testKey",
+    key: "testKey",
     uiString: "test1",
     args: [
       {
@@ -21,7 +21,7 @@ describe("Test Block Instance", () => {
     returnType: "number",
   };
   const blockDef2: IBlockDef = {
-    blockKey: "testKey2",
+    key: "testKey2",
     uiString: "test2",
     args: [
       {
@@ -44,7 +44,7 @@ describe("Test Block Instance", () => {
     });
     let expected: Block.IBlockInstance = {
       blockSetKey: blockSetKey,
-      blockKey: blockDef1.blockKey,
+      blockKey: blockDef1.key,
       args: [
         {
           name: "arg1",
@@ -74,7 +74,7 @@ describe("Test Block Instance", () => {
     });
     let expected: Block.IBlockInstance = {
       blockSetKey: blockSetKey,
-      blockKey: blockDef2.blockKey,
+      blockKey: blockDef2.key,
       args: [
         {
           name: "arg3",

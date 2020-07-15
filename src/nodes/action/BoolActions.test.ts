@@ -2,6 +2,7 @@ import * as Bool from "./BooleanAction";
 
 const actions = Bool.default;
 export const boolAction: Bool.IBooleanAction = {
+  type: "BOOL",
   falseTargets: [],
   trueTargets: [],
   parentNodeIDs: [],
@@ -11,7 +12,8 @@ export const boolAction: Bool.IBooleanAction = {
 
 describe("Bool Actions Tests", () => {
   test("Instance Of", () => {
-    const other: { parentNodeIDs: any[]; id: string } = {
+    const other: { type: ""; parentNodeIDs: any[]; id: string } = {
+      type: "",
       parentNodeIDs: [],
       id: "2",
     };

@@ -23,7 +23,7 @@ describe("Node Reducer Tests", () => {
     state = nodeReducer(state, Actions.addNode(funcAction));
     expect(state).toEqual([boolAction, funcAction]);
     expect(() => {
-      nodeReducer(state, Actions.addNode({ id: "1" }));
+      nodeReducer(state, Actions.addNode({ type: "", id: "1" }));
     }).toThrow();
     expect(state).toEqual([boolAction, funcAction]);
   });
@@ -86,7 +86,7 @@ describe("Node Reducer Tests", () => {
 
   test("Test Set Block and Update Args", () => {
     const blockDef1: IBlockDef = {
-      blockKey: "testKey",
+      key: "testKey",
       uiString: "test1",
       args: [
         {
@@ -103,6 +103,7 @@ describe("Node Reducer Tests", () => {
       returnType: "number",
     };
     const expectedBlock: IBooleanAction = {
+      type: "BOOL",
       falseTargets: [],
       trueTargets: [],
       parentNodeIDs: [],

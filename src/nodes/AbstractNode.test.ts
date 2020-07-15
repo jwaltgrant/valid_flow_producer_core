@@ -5,23 +5,28 @@ import * as Bool from "./action/BooleanAction";
 import NodeActionRegistry from "./NodeActionsRegistry";
 
 export const inputNode: IAbstractNode = {
+  type: "INPUT",
   id: "1",
 };
 
 export const childNodes: IChildNode[] = [
   {
+    type: "",
     id: "2",
     parentNodeIDs: ["1"],
   },
   {
+    type: "",
     id: "3",
     parentNodeIDs: ["1"],
   },
   {
+    type: "",
     id: "4",
     parentNodeIDs: ["2"],
   },
   {
+    type: "",
     id: "5",
     parentNodeIDs: ["4"],
   },
@@ -34,6 +39,7 @@ test("Ancenstors are 1, 2, and 4", () => {
   expect(ancenstors).toEqual(["4", "2", "1"]);
 });
 const boolAction: Bool.IBooleanAction = {
+  type: "BOOL",
   falseTargets: [],
   trueTargets: [],
   parentNodeIDs: [],
@@ -42,6 +48,7 @@ const boolAction: Bool.IBooleanAction = {
 };
 
 const funcAction: Func.IFunctionAction = {
+  type: "FUNC",
   targets: [],
   parentNodeIDs: [],
   block: null,
