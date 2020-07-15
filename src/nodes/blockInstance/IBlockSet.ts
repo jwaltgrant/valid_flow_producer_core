@@ -1,12 +1,13 @@
 import { IBlockArg } from "./BlockArg";
 
 export default interface IBlockSet {
-  blockSetKey: string;
-  blocks: IBlockDef[];
+  key: string;
+  displayName?: string;
+  opperations: IBlockDef[];
 }
 
 export interface IBlockDef {
-  blockKey: string;
+  key: string;
   uiString?: string;
   args?: IBlockArg[];
   listArgs?: boolean;

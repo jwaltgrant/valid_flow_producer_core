@@ -19,23 +19,26 @@ export function initializeFromPayloadDef(
   };
 }
 
-export function addTestField(newField: ITestField) {
+export function addTestField(newField: ITestField, parentKey?: string) {
   return {
     type: FlowTestActions.ADD_TEST_FIELD,
     newField,
+    parentKey,
   };
 }
 
-export function updateTestField(newField: ITestField) {
+export function updateTestField(newField: ITestField, parentKey?: string) {
   return {
     type: FlowTestActions.UPDATE_TEST_FIELD,
     newField,
+    parentKey
   };
 }
 
-export function addTestResult(result: ITestResult) {
+export function addTestResult(result: ITestResult, parentKey?: string) {
   return {
     type: FlowTestActions.ADD_TEST_RESULT,
     result,
+    parentKey
   };
 }

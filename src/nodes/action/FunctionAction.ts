@@ -5,9 +5,11 @@ export interface IFunctionAction extends IActionNode {
   targets: string[];
 }
 
+export const FUNC_TYPE = 'FUNC';
+
 export function initFunctionAction(): IFunctionAction {
   return {
-    ...initActionNode("FUNC"),
+    ...initActionNode(FUNC_TYPE),
     targets: [],
   };
 }
@@ -19,7 +21,7 @@ export enum FunctionActionKey {
 
 class FunctionActions implements INodeActions<IFunctionAction> {
   public instanceOf(node: IAbstractNode): boolean {
-    return "targets" in node;
+    return node.type === FUNC_TYPE;
   }
   public connectNode(
     connectionData: IConnect<IFunctionAction>

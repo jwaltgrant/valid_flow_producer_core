@@ -5,7 +5,7 @@ export enum StateSetActions {
 }
 
 
-export interface ISetReducer<T> {
+export interface IReducerSetState<T> {
   activeItemKey: any;
   items: T[];
 }
@@ -22,13 +22,14 @@ const keySingleton = (function() {
 })();
 
 export interface ICreateStateSetRet<T>{
-    reducer: (state: ISetReducer<T>, action: any) => ISetReducer<T>;
+    reducer: (state: IReducerSetState<T>, action: any) => IReducerSetState<T>;
     addItem: (item: T) => any;
     removeItem: (itemKey: any) => any;
     activateItem: (itemKey: any) => any;
+    findItem: (items: T[], itemKey: any) => T;
 }
 
-export function createStateSet<T>(
+export function createReducerSet<T>(
   singleReducer: (state: T, action: any) => T,
   findItem: (items: T[], key: any) => T
 ): ICreateStateSetRet<T>{
@@ -60,11 +61,11 @@ export function createStateSet<T>(
         const t = action.type;
         return (!!Object.values(StateSetActions).find((i) => `${i}_${key}` === t));
     }
-    const initialState: ISetReducer<any> = {
+    const initialState: IReducerSetState<any> = {
       activeItemKey: null,
       items: [],
     };
-    const setReducer = (state: ISetReducer<T>, action: any) => {
+    const setReducer = (state: IReducerSetState<T>, action: any) => {
         let index;
         let item;
         switch (action.type) {
@@ -103,15 +104,15 @@ export function createStateSet<T>(
         }
         return state;
     }
-    const reducer = (state: ISetReducer<T> = initialState, action: any) => {
+    const reducer = (state: IReducerSetState<T> = initialState, action: any) => {
         if (shouldUseSet(action)) {
           return setReducer(state, action);
         } else {
-          const activeItem = findItem(state.items, state.activeItemKey);
-          if (!activeItem) {
+          const item = findItem(state.items, action.parentKey || state.activeItemKey);
+          if (!item) {
             return state;
           }
-          const activeIndex = state.items.indexOf(activeItem);
+          const activeIndex = state.items.indexOf(item);
           const updated = singleReducer(state.items[activeIndex], action);
           state.items.splice(activeIndex, 1, updated);
           return {
@@ -120,5 +121,5 @@ export function createStateSet<T>(
           };
         }
     }
-    return {reducer, addItem, removeItem, activateItem};
+    return {reducer, addItem, removeItem, activateItem, findItem};
 }

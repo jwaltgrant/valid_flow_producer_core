@@ -44,7 +44,7 @@ export function fromBlockDef(block: ISetBlock): IBlockInstance {
   if (block.blockDef) {
     _block = {
       ..._block,
-      blockKey: block.blockDef.blockKey,
+      blockKey: block.blockDef.key,
       args: block.blockDef.args.map(mapFromArgDef),
     };
   }

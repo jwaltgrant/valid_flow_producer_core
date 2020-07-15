@@ -1,5 +1,7 @@
 import FunctionActions from "./action/FunctionAction";
 import { IActionNode, initActionNode } from "./action/ActionNode";
+import { InputNodeActions } from "./io/InputNode";
+import { OutputNodeActions } from "./io/OutputNode";
 
 export interface INodeActions<T extends IAbstractNode> {
   instanceOf(node: IAbstractNode): boolean;
@@ -9,10 +11,14 @@ export interface INodeActions<T extends IAbstractNode> {
 
 export interface IAbstractNode {
   id: string;
+  type: string;
 }
 
-export function initAbstractNode(id?: string): IAbstractNode {
-  return { id: id || "" };
+export function initAbstractNode(type: string, id?: string): IAbstractNode {
+  return {
+    id: id || "",
+    type,
+  };
 }
 
 /**
@@ -45,9 +51,9 @@ export function getAncenstorNodes(
   return ancestors;
 }
 
-export function initChildNode(id?: string): IChildNode {
+export function initChildNode(type: string, id?: string): IChildNode {
   return {
-    ...initAbstractNode(id),
+    ...initAbstractNode(type, id),
     parentNodeIDs: [],
   };
 }
