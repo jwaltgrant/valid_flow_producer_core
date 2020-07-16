@@ -28,6 +28,7 @@ describe("Test Function Actions", () => {
       targets: [],
       parentNodeIDs: ["2"],
       id: "1",
+      type: "FUNC",
     });
   });
   test("Add Target", () => {
@@ -41,6 +42,7 @@ describe("Test Function Actions", () => {
       targets: ["3"],
       parentNodeIDs: ["2"],
       id: "1",
+      type: "FUNC",
     });
   });
   test("Remove Input", () => {
@@ -54,6 +56,7 @@ describe("Test Function Actions", () => {
       targets: ["3"],
       parentNodeIDs: [],
       id: "1",
+      type: "FUNC",
     });
   });
   test("Remove Target", () => {
@@ -67,6 +70,7 @@ describe("Test Function Actions", () => {
       targets: [],
       parentNodeIDs: [],
       id: "1",
+      type: "FUNC",
     });
   });
 });

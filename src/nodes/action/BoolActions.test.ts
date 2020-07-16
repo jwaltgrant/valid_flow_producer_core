@@ -34,6 +34,7 @@ describe("Bool Actions Tests", () => {
       parentNodeIDs: ["2"],
       block: null,
       id: "1",
+      type: "BOOL",
     });
   });
 
@@ -50,6 +51,7 @@ describe("Bool Actions Tests", () => {
       parentNodeIDs: ["2"],
       block: null,
       id: "1",
+      type: "BOOL",
     });
   });
   test("Connect True", () => {
@@ -65,6 +67,7 @@ describe("Bool Actions Tests", () => {
       parentNodeIDs: ["2"],
       block: null,
       id: "1",
+      type: "BOOL",
     });
   });
   test("disconnect Input", () => {
@@ -80,6 +83,7 @@ describe("Bool Actions Tests", () => {
       parentNodeIDs: [],
       block: null,
       id: "1",
+      type: "BOOL",
     });
   });
 
@@ -96,6 +100,7 @@ describe("Bool Actions Tests", () => {
       parentNodeIDs: [],
       block: null,
       id: "1",
+      type: "BOOL",
     });
   });
   test("Disconnect True", () => {
@@ -111,6 +116,7 @@ describe("Bool Actions Tests", () => {
       parentNodeIDs: [],
       block: null,
       id: "1",
+      type: "BOOL",
     });
   });
 });

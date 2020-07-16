@@ -2,6 +2,7 @@ import { INodeActions, IAbstractNode, IConnect } from ".";
 
 import FunctionActions from "./action/FunctionAction";
 import BooleanActions from "./action/BooleanAction";
+import { InActions, OutActions } from "./io/IOActionRegsitry";
 
 class NodeActionClassRegistry {
   private nodeActionClasses: INodeActions<IAbstractNode>[];
@@ -35,5 +36,7 @@ class NodeActionClassRegistry {
 const NodeActionRegistry = new NodeActionClassRegistry();
 NodeActionRegistry.registerNodeActionClass(FunctionActions);
 NodeActionRegistry.registerNodeActionClass(BooleanActions);
+NodeActionRegistry.registerNodeActionClass(InActions);
+NodeActionRegistry.registerNodeActionClass(OutActions);
 
 export default NodeActionRegistry;

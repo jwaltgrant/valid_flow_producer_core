@@ -1,8 +1,3 @@
-import FunctionActions from "./action/FunctionAction";
-import { IActionNode, initActionNode } from "./action/ActionNode";
-import { InputNodeActions } from "./io/InputNode";
-import { OutputNodeActions } from "./io/OutputNode";
-
 export interface INodeActions<T extends IAbstractNode> {
   instanceOf(node: IAbstractNode): boolean;
   connectNode(connectionData: IConnect<T>): T;

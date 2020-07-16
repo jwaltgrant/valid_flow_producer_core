@@ -70,6 +70,7 @@ describe("Node Action Registry Tests", () => {
       parentNodeIDs: ["3"],
       block: null,
       id: "1",
+      type: "BOOL",
     });
     expect(
       actions.connect({
@@ -83,6 +84,7 @@ describe("Node Action Registry Tests", () => {
       parentNodeIDs: ["3"],
       block: null,
       id: "1",
+      type: "BOOL",
     });
     expect(
       actions.connect({
@@ -96,6 +98,7 @@ describe("Node Action Registry Tests", () => {
       parentNodeIDs: ["3"],
       block: null,
       id: "1",
+      type: "BOOL",
     });
     expect(
       actions.disconnect({
@@ -109,6 +112,7 @@ describe("Node Action Registry Tests", () => {
       parentNodeIDs: [],
       block: null,
       id: "1",
+      type: "BOOL",
     });
     expect(
       actions.disconnect({
@@ -122,6 +126,7 @@ describe("Node Action Registry Tests", () => {
       parentNodeIDs: [],
       block: null,
       id: "1",
+      type: "BOOL",
     });
     expect(
       actions.disconnect({
@@ -135,6 +140,7 @@ describe("Node Action Registry Tests", () => {
       parentNodeIDs: [],
       block: null,
       id: "1",
+      type: "BOOL",
     });
   });
   test("Add/Remove Func from registry", () => {
@@ -149,6 +155,7 @@ describe("Node Action Registry Tests", () => {
       targets: [],
       block: null,
       id: "2",
+      type: "FUNC",
     });
     expect(
       actions.connect({
@@ -161,6 +168,7 @@ describe("Node Action Registry Tests", () => {
       targets: ["4"],
       block: null,
       id: "2",
+      type: "FUNC",
     });
     expect(
       actions.disconnect({
@@ -173,6 +181,7 @@ describe("Node Action Registry Tests", () => {
       targets: ["4"],
       block: null,
       id: "2",
+      type: "FUNC",
     });
     expect(
       actions.disconnect({
@@ -185,6 +194,7 @@ describe("Node Action Registry Tests", () => {
       targets: [],
       block: null,
       id: "2",
+      type: "FUNC",
     });
   });
 });
