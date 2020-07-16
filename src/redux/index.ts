@@ -1,3 +1,14 @@
-import { flowStore, FlowTestStore, FlowStoreActions } from "./flow_store";
+import {
+  flowStore,
+  FlowTestStore,
+  FlowStoreActions,
+  IFlowStoreState,
+} from "./flow_store";
 import { typesStore } from "./typesStore";
-export { flowStore, FlowTestStore, typesStore, FlowStoreActions };
+export {
+  flowStore,
+  FlowTestStore,
+  typesStore,
+  FlowStoreActions,
+  IFlowStoreState,
+};
