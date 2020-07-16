@@ -50,6 +50,7 @@ describe("Node Reducer Tests", () => {
         connectionKey: BooleanConnectionKey.FALSE,
       })
     );
+    console.log(state);
     expect(state).toEqual([connectedBool, funcAction]);
     state = nodeReducer(
       state,

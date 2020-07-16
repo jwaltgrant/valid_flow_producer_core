@@ -6,7 +6,17 @@ export const boolAction: Bool.IBooleanAction = {
   falseTargets: [],
   trueTargets: [],
   parentNodeIDs: [],
-  block: null,
+  block: {
+    args: [
+      {
+        name: "arg1",
+        value: "1",
+        payloadElement: false,
+      },
+    ],
+    blockKey: "test",
+    blockSetKey: "test",
+  },
   id: "1",
 };
 
@@ -32,7 +42,17 @@ describe("Bool Actions Tests", () => {
       falseTargets: [],
       trueTargets: [],
       parentNodeIDs: ["2"],
-      block: null,
+      block: {
+        args: [
+          {
+            name: "arg1",
+            value: "1",
+            payloadElement: false,
+          },
+        ],
+        blockKey: "test",
+        blockSetKey: "test",
+      },
       id: "1",
       type: "BOOL",
     });
@@ -49,7 +69,17 @@ describe("Bool Actions Tests", () => {
       falseTargets: ["3"],
       trueTargets: [],
       parentNodeIDs: ["2"],
-      block: null,
+      block: {
+        args: [
+          {
+            name: "arg1",
+            value: "1",
+            payloadElement: false,
+          },
+        ],
+        blockKey: "test",
+        blockSetKey: "test",
+      },
       id: "1",
       type: "BOOL",
     });
@@ -65,7 +95,17 @@ describe("Bool Actions Tests", () => {
       falseTargets: ["3"],
       trueTargets: ["4"],
       parentNodeIDs: ["2"],
-      block: null,
+      block: {
+        args: [
+          {
+            name: "arg1",
+            value: "1",
+            payloadElement: false,
+          },
+        ],
+        blockKey: "test",
+        blockSetKey: "test",
+      },
       id: "1",
       type: "BOOL",
     });
@@ -81,7 +121,17 @@ describe("Bool Actions Tests", () => {
       falseTargets: ["3"],
       trueTargets: ["4"],
       parentNodeIDs: [],
-      block: null,
+      block: {
+        args: [
+          {
+            name: "arg1",
+            value: "1",
+            payloadElement: false,
+          },
+        ],
+        blockKey: "test",
+        blockSetKey: "test",
+      },
       id: "1",
       type: "BOOL",
     });
@@ -98,7 +148,17 @@ describe("Bool Actions Tests", () => {
       falseTargets: [],
       trueTargets: ["4"],
       parentNodeIDs: [],
-      block: null,
+      block: {
+        args: [
+          {
+            name: "arg1",
+            value: "1",
+            payloadElement: false,
+          },
+        ],
+        blockKey: "test",
+        blockSetKey: "test",
+      },
       id: "1",
       type: "BOOL",
     });
@@ -114,7 +174,17 @@ describe("Bool Actions Tests", () => {
       falseTargets: [],
       trueTargets: [],
       parentNodeIDs: [],
-      block: null,
+      block: {
+        args: [
+          {
+            name: "arg1",
+            value: "1",
+            payloadElement: false,
+          },
+        ],
+        blockKey: "test",
+        blockSetKey: "test",
+      },
       id: "1",
       type: "BOOL",
     });
