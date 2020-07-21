@@ -137,4 +137,9 @@ describe("Node Reducer Tests", () => {
     state = nodeReducer(state, Actions.setReturnKey(boolAction.id, testKey));
     expect((state[0] as IActionNode).returnKey).toEqual(testKey);
   });
+  test("Test Set Display Label", () => {
+    const display = "testLabel";
+    state = nodeReducer(state, Actions.setDisplayLabel(boolAction.id, display));
+    expect((state[0] as IAbstractNode).displayLabel).toEqual(display);
+  });
 });

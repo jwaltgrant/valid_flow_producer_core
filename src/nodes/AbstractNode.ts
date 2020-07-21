@@ -7,6 +7,7 @@ export interface INodeActions<T extends IAbstractNode> {
 export interface IAbstractNode {
   id: string;
   type: string;
+  displayLabel?: string;
 }
 
 export function initAbstractNode(type: string, id?: string): IAbstractNode {

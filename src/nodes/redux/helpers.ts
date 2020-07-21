@@ -163,4 +163,22 @@ export class ActionNodeHelpers {
     state.splice(index, 1, _node);
     return [...state];
   }
+
+  static setDisplayLabel(
+    state: IAbstractNode[],
+    nodeID: string,
+    displayLabel: string
+  ): IAbstractNode[] {
+    const node = ActionNodeHelpers.findActionNode(state, nodeID);
+    if (!node) {
+      return state;
+    }
+    const index = state.indexOf(node);
+    const _node = {
+      ...node,
+      displayLabel,
+    };
+    state.splice(index, 1, _node);
+    return [...state];
+  }
 }

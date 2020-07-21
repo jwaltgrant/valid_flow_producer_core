@@ -41,6 +41,12 @@ export default function nodeStore(
         action.nodeID,
         action.returnKey
       );
+    case NODE_ACTIONS.SET_DISPLAY_LABEL:
+      return ActionNodeHelpers.setDisplayLabel(
+        state,
+        action.nodeID,
+        action.displayLabel
+      );
     default:
       if (outputMatches(action.type)) {
         return outputNodeReducer(state as IOutputNode[], action);

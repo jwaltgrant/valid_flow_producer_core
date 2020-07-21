@@ -10,6 +10,7 @@ export enum NODE_ACTIONS {
   SET_BLOCK = "na_set_block",
   SET_ARG = "na_set_arg",
   SET_RETURN_KEY = "na_set_ret_key",
+  SET_DISPLAY_LABEL = "na_set_display_label",
 }
 
 export function connectNode(connectionData: IConnect<IAbstractNode>) {
@@ -66,5 +67,13 @@ export function setReturnKey(nodeID: string, returnKey: string | null) {
     type: NODE_ACTIONS.SET_RETURN_KEY,
     nodeID,
     returnKey,
+  };
+}
+
+export function setDisplayLabel(nodeID: string, displayLabel: string) {
+  return {
+    type: NODE_ACTIONS.SET_DISPLAY_LABEL,
+    nodeID,
+    displayLabel,
   };
 }
