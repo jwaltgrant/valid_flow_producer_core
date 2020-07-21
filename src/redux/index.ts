@@ -4,11 +4,12 @@ import {
   FlowStoreActions,
   IFlowStoreState,
 } from "./flow_store";
-import { typesStore } from "./typesStore";
+import { typesStore, BASE_TYPES } from "./typesStore";
 export {
   flowStore,
   FlowTestStore,
   typesStore,
   FlowStoreActions,
   IFlowStoreState,
+  BASE_TYPES,
 };
