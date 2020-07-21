@@ -12,6 +12,7 @@ export enum BaseTypes {
 
 export interface IType {
   typeName: string;
+  displayName?: string;
   fields: IFieldDef[];
   blocks: IBlockImplementation[];
 }
